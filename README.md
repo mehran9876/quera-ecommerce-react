@@ -1,6 +1,6 @@
 # Project layout
 
-/src
+```/src\
 ├── /components // Reusable UI components (buttons, cards, modals, etc.)
 │ ├── Button.jsx
 │ ├── Card.jsx
@@ -40,4 +40,4 @@
 │ ├── styles.css
 │
 ├── App.jsx // Root component
-├── index.js
+├── index.js```
