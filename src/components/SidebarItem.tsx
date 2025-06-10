@@ -1,7 +1,6 @@
 import { NavLink } from "react-router";
 
-interface SidebarItems {
-  active?: boolean;
+interface SidebarItemProps {
   className?: string;
   to: string;
   icon: React.ReactNode;
@@ -9,17 +8,18 @@ interface SidebarItems {
 }
 
 export const SidebarItems = ({
-  active = false,
-  className,
+  className = "",
   to,
   icon,
   children,
-}: SidebarItems) => {
+}: SidebarItemProps) => {
   return (
     <li>
       <NavLink
         to={to}
-        className={`flex gap-2 rounded-sm p-2 text-base ${active ? "bg-[#DB277711] text-[#DB2777]" : ""} ${className}`}
+        className={({ isActive }) =>
+          `flex gap-2 rounded-sm p-2 text-base ${isActive ? "bg-[#DB277711] text-[#DB2777]" : ""} ${className}`
+        }
       >
         {icon}
         {children}
