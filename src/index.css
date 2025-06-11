@@ -8,39 +8,37 @@
   src: url(..\public\fonts\Qs_Iranyekan.ttf);
 }
 
-@theme{
---color-primaryFont: #000000;
---color-placeholder: #58616c;
---color-btnWhite: #ffffff;
---color-bgInput: #ffffff;
---color-primaryBtnPink: #DB2777;
---color-darkPink: #831747;
---color-btnGreen: #22C55E;
---color-btnRed: #B71D18;
---color-checkboxBlue: #00B8D9;
---color-bgDarkGray: #E6E8EB;
---color-unloadedImgGray: #6C7885;
---color-bgCard: #E6E8EB;
---color-bgFilterMenu: #E6E8EB;
---color-bgFaveUnloadedImg: #B5BBC3;
---color-darkPink: #831747;
+@theme {
+  --font-iranYekan: "iranYekan";
+  --color-primaryFont: #000000;
+  --color-placeholder: #58616c;
+  --color-btnWhite: #ffffff;
+  --color-bgInput: #ffffff;
+  --color-primaryBtnPink: #db2777;
+  --color-darkPink: #831747;
+  --color-btnGreen: #22c55e;
+  --color-btnRed: #b71d18;
+  --color-checkboxBlue: #00b8d9;
+  --color-bgDarkGray: #e6e8eb;
+  --color-unloadedImgGray: #6c7885;
+  --color-bgCard: #e6e8eb;
+  --color-bgFilterMenu: #e6e8eb;
+  --color-bgFaveUnloadedImg: #b5bbc3;
+  --color-darkPink: #831747;
 
---border-inputBorder: 1px solid #CED2D7;
---border-inputOutline: 1px solid #078DEE;
+  --border-inputBorder: 1px solid #ced2d7;
+  --border-inputOutline: 1px solid #078dee;
 }
 
-@layer base{
-  @variant dark{
+@layer base {
+  @variant dark {
     --color-primaryFont: #ffffff;
-    --color-placeholder: #9CA3AF;
+    --color-placeholder: #9ca3af;
     --color-bgInput: #141516;
     --color-bgDarkGray: #151515;
-    --color-bgCard: #1F2937;
+    --color-bgCard: #1f2937;
     --color-bgFilterMenu: #151515;
-    --color-bgFaveUnloadedImg: #DFE3E8;
-
---border-inputBorder: 1px solid #3F4043;
-
-
+    --color-bgFaveUnloadedImg: #dfe3e8;
+    --border-inputBorder: 1px solid #3f4043;
   }
 }
