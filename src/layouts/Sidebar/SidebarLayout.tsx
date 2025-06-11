@@ -32,7 +32,7 @@ export const SidebarLayout = ({ expanded = true }: SidebarItemProps) => {
   return (
     // Sidebar container with dynamic width based on 'expanded' prop
     <div
-      className={`bg-sidebar-bg text-primaryFont absolute top-0 right-0 flex h-screen flex-col items-start justify-between p-4 ${expanded ? "w-1/4" : "w-min"}`}
+      className={`bg-sidebar-bg text-primaryFont relative flex h-full w-full flex-col items-start justify-between p-4`}
     >
       {/* Main navigation links */}
       <SidebarList>
