@@ -1,5 +1,12 @@
+import { SidebarLayout } from "./layouts/Sidebar/SidebarLayout";
+
 function App() {
-  return <></>;
+  const sidebarExpanded = false;
+  return (
+    <>
+      <SidebarLayout expanded={sidebarExpanded} />
+    </>
+  );
 }
 
 export default App;
