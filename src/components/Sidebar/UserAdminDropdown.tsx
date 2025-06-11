@@ -10,7 +10,7 @@ export const UserAdminDropdown = ({ isOpen }: UserAdminDropdownProps) => {
   ];
   return (
     <ul
-      className={`bg-bgDarkGray menu absolute right-10 bottom-10 flex w-42 flex-col gap-4 rounded-lg border-(--border-inputBorder) px-2 py-4 ${isOpen ? "block" : "hidden"}`}
+      className={`bg-bgDarkGray menu absolute right-10 bottom-10 flex w-42 flex-col gap-4 rounded-lg border-[var(--border-inputBorder)] px-2 py-4 ${isOpen ? "block" : "hidden"}`}
     >
       {links.map((link) => (
         <SidebarItem key={link.text} to={link.to}>
