@@ -6,6 +6,8 @@
  * LeftArrowIcon
  * LoginIcon
  * SignupIcon
+ * Chevron
+ * Favorite
  */
 
 // !NOTE: All the icons use their parent text color as fill and stroke
@@ -179,10 +181,24 @@ export const Chevron = ({ variant = "down" }: { variant?: "up" | "down" }) => (
       id="Vector"
       d="M10 0.66L5.33 5.33L0.66 0.66"
       stroke="currentColor"
-      stroke-opacity="1.000000"
-      stroke-width="1.333333"
-      stroke-linejoin="round"
-      stroke-linecap="round"
+      strokeOpacity="1.000000"
+      strokeWidth="1.333333"
+      strokeLinejoin="round"
+      strokeLinecap="round"
     />
+  </svg>
+);
+
+export const Favorite = ({ isFavorite }: { isFavorite: boolean }) => (
+  <svg
+    width="19.000000"
+    height="18.000000"
+    viewBox="0 0 19 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={`${isFavorite ? "fill-red-600 stroke-red-600" : "fill-none stroke-current"}`}
+  >
+    <path d="M17.15 1.23C15.12 -0.65 12.09 -0.31 10.23 1.77L9.5 2.59L8.76 1.77C6.9 -0.31 3.87 -0.65 1.84 1.23C-0.49 3.38 -0.61 7.24 1.47 9.58L8.65 17.61C9.12 18.12 9.87 18.12 10.33 17.61L17.51 9.58C19.6 7.24 19.48 3.38 17.15 1.23Z" />
+    <path d="M10.23 1.77L9.5 2.59L8.76 1.77C6.9 -0.31 3.87 -0.65 1.84 1.23C-0.49 3.38 -0.61 7.24 1.47 9.58L8.65 17.61C9.12 18.12 9.87 18.12 10.33 17.61L17.51 9.58C19.6 7.24 19.48 3.38 17.15 1.23C15.12 -0.65 12.09 -0.31 10.23 1.77Z" />
   </svg>
 );
