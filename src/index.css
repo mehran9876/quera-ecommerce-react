@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: iranYekan;
-  src: url(../public/fonts/Qs_Iranyekan.ttf);
+  src: url(../fonts/Qs_Iranyekan.ttf);
 }
 
 @theme {
@@ -27,6 +27,7 @@
   --color-darkPink: #831747;
   --color-background: #eeeff1;
   --color-sidebar-bg: #fff;
+  --color-productLayout: #dfe3e8;
 
   --border-inputBorder: 1px solid #ced2d7;
   --border-inputOutline: 1px solid #078dee;
