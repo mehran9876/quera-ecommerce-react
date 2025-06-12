@@ -6,7 +6,7 @@ interface PageLayoutProps {
 }
 
 export const PageLayout = ({ children }: PageLayoutProps) => {
-  const sidebarExpanded = true;
+  const sidebarExpanded = false;
   return (
     <div
       className={`grid h-screen ${sidebarExpanded ? "grid-cols-[1fr_4fr]" : "grid-cols-[72px_1fr]"} gap-4`}
