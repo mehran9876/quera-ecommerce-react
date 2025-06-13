@@ -15,6 +15,13 @@ export type ProductType = {
   __v: number;
 };
 
+type UserType = {
+  _id: string;
+  username: string;
+  email: string;
+  isAdmin: boolean;
+};
+
 export const product: ProductType = {
   _id: "6849d43c84b146939019c32a",
   name: "test product",
@@ -30,4 +37,11 @@ export const product: ProductType = {
   createdAt: "2025-06-11T19:08:44.587Z",
   updatedAt: "2025-06-11T19:08:44.587Z",
   __v: 0,
+};
+
+export const user: UserType = {
+  _id: "6849d43c84b14693",
+  username: "heshmat",
+  email: "heshmat@mail.com",
+  isAdmin: false,
 };
