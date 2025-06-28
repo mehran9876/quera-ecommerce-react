@@ -14,7 +14,7 @@
   --color-placeholder: #58616c;
   --color-btnWhite: #ffffff;
   --color-bgInput: #ffffff;
-  --color-primaryBtnPink: #db2777;
+  --color-primaryPink: #db2777;
   --color-darkPink: #831747;
   --color-btnGreen: #22c55e;
   --color-btnRed: #b71d18;
@@ -31,6 +31,13 @@
 
   --border-inputBorder: 1px solid #ced2d7;
   --border-inputOutline: 1px solid #078dee;
+  --border-select: 1px solid #3f4043;
+}
+
+@layer utilities {
+  .border-select {
+    border: 1px solid #3f4043;
+  }
 }
 
 @layer base {
