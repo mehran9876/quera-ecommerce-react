@@ -21,11 +21,12 @@ const Input = ({
 }: InputProps) => {
   return (
     <>
-      {label && (
-        <label htmlFor={id} className="label text-primaryFont block">
-          {label}
-        </label>
-      )}
+      <label
+        htmlFor={id}
+        className={`label text-primaryFont mb-2 block ${label ? "" : "hidden"}`}
+      >
+        {label}
+      </label>
       <input
         id={id}
         name={id}
@@ -33,7 +34,7 @@ const Input = ({
         value={value}
         onChange={(e) => onChange(e)}
         placeholder={placeholder}
-        className={`input w-full focus:outline-0 ${size === "md" ? "input-md" : "input-sm"} ${className} `}
+        className={`input focus:border-inputOutline w-full focus:outline-0 ${size === "md" ? "input-md" : "input-sm"} ${className} `}
       />
     </>
   );
