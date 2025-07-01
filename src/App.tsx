@@ -3,11 +3,9 @@ import UserProductPage from "./pages/UserProduct/UserProductPage";
 
 function App() {
   return (
-    <>
-      <PageLayout>
-        <UserProductPage />
-      </PageLayout>
-    </>
+    <PageLayout>
+      <UserProductPage />
+    </PageLayout>
   );
 }
 
