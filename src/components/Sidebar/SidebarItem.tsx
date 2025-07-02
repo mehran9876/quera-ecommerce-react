@@ -14,7 +14,6 @@ export const SidebarItem = ({
   className = "",
   to,
   icon,
-  // isActive = false,
   children,
 }: SidebarItemProps) => {
   return (

@@ -38,7 +38,7 @@ export const SidebarLayout = ({ expanded = true }: SidebarItemProps) => {
     >
       {/* Main navigation links */}
       <SidebarList>
-        <SidebarItem to="/" icon={<HomeIcon />} isActive>
+        <SidebarItem to="/" icon={<HomeIcon />}>
           {expanded ? "صفحه اصلی" : ""}
         </SidebarItem>
         <SidebarItem to="/shop" icon={<ShopIcon />}>
