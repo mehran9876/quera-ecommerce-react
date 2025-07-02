@@ -28,6 +28,17 @@ const AdminUsersPage = () => {
   const handleDelete = (_id: string) => {
     setUsers((users) => users.filter((user) => user._id !== _id));
   };
+  const handdleUpdate: (_id: string, prop: string, value: string) => void = (
+    _id,
+    prop,
+    value,
+  ) => {
+    setUsers((user) =>
+      user.map((user) =>
+        user._id === _id ? { ...user, [prop]: value } : user,
+      ),
+    );
+  };
 
   return (
     <section className="mx-20 my-15">
@@ -48,7 +59,12 @@ const AdminUsersPage = () => {
             </tr>
           )}
           {users.map((user) => (
-            <UserTableRow user={user} key={user._id} onDelete={handleDelete} />
+            <UserTableRow
+              user={user}
+              key={user._id}
+              onDelete={handleDelete}
+              onUpdate={handdleUpdate}
+            />
           ))}
         </tbody>
       </table>
@@ -58,9 +74,11 @@ const AdminUsersPage = () => {
 const UserTableRow = ({
   user,
   onDelete,
+  onUpdate,
 }: {
   user: UserType;
   onDelete: (_id: string) => void;
+  onUpdate: (_id: string, prop: string, value: string) => void;
 }) => {
   const [usernameEditing, setUsernameEditing] = useState(false);
   const [emailEditing, setEmailEditing] = useState(false);
@@ -70,13 +88,13 @@ const UserTableRow = ({
   const handleUsernameEdit = () => {
     if (!usernameEditing) return setUsernameEditing(true);
 
-    user.username = usernameRef.current!.value;
+    onUpdate(user._id, "username", usernameRef.current!.value);
     setUsernameEditing(false);
   };
   const handleEmailEdit = () => {
     if (!emailEditing) return setEmailEditing(true);
 
-    user.email = emailRef.current!.value;
+    onUpdate(user._id, "email", emailRef.current!.value);
     setEmailEditing(false);
   };
 
