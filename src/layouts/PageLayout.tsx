@@ -1,11 +1,7 @@
-import type { ReactNode } from "react";
 import { SidebarLayout } from "./Sidebar/SidebarLayout";
+import { Outlet } from "react-router-dom";
 
-interface PageLayoutProps {
-  children: ReactNode;
-}
-
-export const PageLayout = ({ children }: PageLayoutProps) => {
+export const PageLayout = () => {
   const sidebarExpanded = false;
   return (
     <div
@@ -16,7 +12,9 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
       >
         <SidebarLayout expanded={sidebarExpanded} />
       </aside>
-      <main className="col-start-2 overflow-scroll">{children}</main>
+      <main className="col-start-2 overflow-scroll">
+        <Outlet />
+      </main>
     </div>
   );
 };

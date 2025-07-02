@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "../../components/general/button";
-import { product } from "../../assets/testData";
 import {
   BoxIcon,
   CartFullIcon,
@@ -8,10 +7,15 @@ import {
   ShopFullIcon,
   StarIcon,
 } from "../../assets/icons";
+import { useLoaderData } from "react-router";
 
 const UserProductPage = () => {
   const [quantity, setQuantity] = React.useState(1);
-  const productObj = product;
+
+  // react router loader
+  const productObj = useLoaderData();
+
+  // derived states
   const productPrice = Intl.NumberFormat("fa-IR").format(productObj.price);
 
   return (
