@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import UserCartPage from "./pages/userCartPage";
+import AdminUsersPage from "./pages/AdminUsersPage";
 
 export type ProductType = {
   _id: string;
@@ -45,7 +46,15 @@ const router = createBrowserRouter([
       },
       {
         path: "admin",
-        children: [{ path: "dashboard", element: <h1>Dashboard</h1> }],
+        children: [
+          { path: "dashboard", element: <h1>Dashboard</h1> },
+          {
+            path: "users",
+            element: <AdminUsersPage />,
+            errorElement: <p>error</p>,
+            loader: async () => await fetch(`https://qbc9.liara.run/api/users`),
+          },
+        ],
       },
       {
         path: "product/:productId",

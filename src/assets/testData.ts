@@ -15,7 +15,7 @@ export type ProductType = {
   __v: number;
 };
 
-type UserType = {
+export type UserType = {
   _id: string;
   username: string;
   email: string;
