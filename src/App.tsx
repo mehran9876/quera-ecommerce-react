@@ -6,23 +6,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import UserCartPage from "./pages/userCartPage";
 import AdminUsersPage from "./pages/AdminUsersPage";
-
-export type ProductType = {
-  _id: string;
-  name: string;
-  image: string;
-  quantity: number;
-  category: string;
-  description: string;
-  rating: number;
-  numReviews: number;
-  price: number;
-  countInStock: number;
-  reviews: [];
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-};
+import axiosInstance from "./utils/axios";
+import UserShopPage from "./pages/userShopPage/userShopPage";
 
 // react query
 // 1. Create a client
@@ -36,7 +21,10 @@ const router = createBrowserRouter([
       { index: true, element: <h1>Home Page</h1> },
       { path: "login", element: <Login /> },
       { path: "signup", element: <Register /> },
-      { path: "shop", element: <h1>User shop page</h1> },
+      {
+        path: "shop",
+        element: <UserShopPage />,
+      },
       {
         path: "user",
         children: [
@@ -52,7 +40,8 @@ const router = createBrowserRouter([
             path: "users",
             element: <AdminUsersPage />,
             errorElement: <p>error</p>,
-            loader: async () => await fetch(`https://qbc9.liara.run/api/users`),
+            loader: async () =>
+              await axiosInstance(`/api/users`).then((res) => res.data),
           },
         ],
       },
@@ -61,9 +50,7 @@ const router = createBrowserRouter([
         element: <UserProductPage />,
         errorElement: <p>error</p>,
         loader: async ({ params }) =>
-          await fetch(
-            `https://qbc9.liara.run/api/products/${params.productId}`,
-          ),
+          await axiosInstance(`/api/products/${params.productId}`),
       },
       {
         path: "*",
