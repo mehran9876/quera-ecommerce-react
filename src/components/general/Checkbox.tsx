@@ -1,10 +1,13 @@
 // this component needs checked prop to work properly and onChange to change when clicked
 
+// import { useState } from "react";
+// import { useSearchParams } from "react-router";
+
 interface CheckboxProps {
   id: string;
   label: string;
   checked?: boolean;
-  onChange?: () => void;
+  onChange: (id: string) => void;
   color?: string;
 }
 const Checkbox = ({
@@ -21,7 +24,7 @@ const Checkbox = ({
         type="checkbox"
         id={id}
         checked={checked}
-        onChange={onChange}
+        onChange={() => onChange(id)}
       />
       <label htmlFor={id} className="text-sm">
         {label}

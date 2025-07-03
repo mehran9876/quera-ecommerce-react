@@ -41,7 +41,7 @@ export const SidebarLayout = ({ expanded = true }: SidebarItemProps) => {
         <SidebarItem to="/" icon={<HomeIcon />}>
           {expanded ? "صفحه اصلی" : ""}
         </SidebarItem>
-        <SidebarItem to="/shop" icon={<ShopIcon />}>
+        <SidebarItem to="/products" icon={<ShopIcon />}>
           {expanded ? "محصولات" : ""}
         </SidebarItem>
         <SidebarItem to="/user/cart" icon={<CartIcon />}>
