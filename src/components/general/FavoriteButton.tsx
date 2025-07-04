@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Favorite } from "../../assets/icons";
 
 interface FavoriteButtonI {
@@ -8,17 +9,20 @@ interface FavoriteButtonI {
 const FavoriteButton = ({
   _id,
   isFavorite = false,
+
   className = "",
 }: FavoriteButtonI) => {
-  const handleAddFavorites = () => {
-    console.log(`Add ${_id} to favorites`);
+  const [favorite, setFavorite] = useState(isFavorite);
+  const handleFavorites = () => {
+    console.log(`_id: ${_id} favorite: ${favorite}`);
+    setFavorite((prev) => !prev);
   };
   return (
     <button
-      onClick={handleAddFavorites}
-      className={`btn btn-ghost h-min w-min rounded-full ${className}`}
+      onClick={handleFavorites}
+      className={`btn btn-ghost h-min w-min rounded-full border-0 p-1 hover:bg-transparent ${className}`}
     >
-      <Favorite isFavorite={isFavorite} />
+      <Favorite isFavorite={favorite} />
     </button>
   );
 };

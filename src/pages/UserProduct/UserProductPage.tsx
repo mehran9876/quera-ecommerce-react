@@ -68,12 +68,12 @@ const UserProductPage = () => {
             <p className="flex items-center gap-2">
               <StarIcon />
               <span className="text-placeholder">نظرات:</span>
-              <span>{productObj.reviews.length}</span>
+              <span>{productObj.reviews?.length}</span>
             </p>
           </div>
           <div className="flex items-center justify-between">
             <p>
-              <span>{productObj.reviews.length} نظر</span>
+              <span>{productObj.reviews?.length} نظر</span>
             </p>
             <label className="hidden" htmlFor="quantity">
               quantity

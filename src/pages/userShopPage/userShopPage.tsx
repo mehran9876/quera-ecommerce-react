@@ -1,4 +1,4 @@
-import ProductLayoutFull from "../../layouts/ProductLayoutFull";
+import ProductLayoutFull from "../../components/general/ProductLayoutFull";
 import UserShopSidebar from "./userShopSidebar";
 import type { ProductType } from "../../types/productType";
 import { useQuery } from "@tanstack/react-query";

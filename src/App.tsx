@@ -50,7 +50,9 @@ const router = createBrowserRouter([
         element: <UserProductPage />,
         errorElement: <p>error</p>,
         loader: async ({ params }) =>
-          await axiosInstance(`/api/products/${params.productId}`),
+          await axiosInstance(`/api/products/${params.productId}`).then(
+            (res) => res.data,
+          ),
       },
       {
         path: "*",
