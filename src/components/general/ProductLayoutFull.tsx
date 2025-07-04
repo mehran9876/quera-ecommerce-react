@@ -3,6 +3,7 @@ import type { ProductType } from "../../assets/testData";
 import { useCategory } from "../../hooks/useCategory";
 import Badge from "./Badge";
 import Button from "./button";
+import FavoriteButton from "./FavoriteButton";
 
 interface ProductLayoutFullProps {
   product: ProductType;
@@ -13,13 +14,15 @@ const ProductLayoutFull = ({ product }: ProductLayoutFullProps) => {
     <figure className="bg-bgCard max-w-96 overflow-hidden rounded-lg">
       <div className="relative h-42.5 overflow-hidden">
         <img className="object-cover" src={product.image} alt={product.name} />
-        {isError ? (
-          <p>error</p>
-        ) : isLoading ? (
-          <p>loading...</p>
-        ) : (
-          <Badge className="absolute right-2 bottom-2" text={category.name} />
-        )}
+        <FavoriteButton
+          _id={product._id}
+          isFavorite={false}
+          className="absolute top-3 right-3"
+        />
+        <Badge
+          className="absolute right-2 bottom-2"
+          text={isError ? "error" : isLoading ? "loading" : category.name}
+        />
       </div>
       <div className="p-5">
         <div className="flex items-center justify-between">
