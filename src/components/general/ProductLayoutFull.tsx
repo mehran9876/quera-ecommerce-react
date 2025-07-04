@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CartIcon } from "../../assets/icons";
 import type { ProductType } from "../../assets/testData";
 import { useCategory } from "../../hooks/useCategory";
@@ -10,10 +11,17 @@ interface ProductLayoutFullProps {
 }
 const ProductLayoutFull = ({ product }: ProductLayoutFullProps) => {
   const { isError, isLoading, data: category } = useCategory(product.category);
+
   return (
     <figure className="bg-bgCard max-w-96 overflow-hidden rounded-lg">
       <div className="relative h-42.5 overflow-hidden">
-        <img className="object-cover" src={product.image} alt={product.name} />
+        <Link to={`/product/${product._id}`}>
+          <img
+            className="object-cover"
+            src={product.image}
+            alt={product.name}
+          />
+        </Link>
         <FavoriteButton
           _id={product._id}
           isFavorite={false}
@@ -33,7 +41,9 @@ const ProductLayoutFull = ({ product }: ProductLayoutFullProps) => {
         </div>
         <p className="mb-3 text-[#9CA3AF]">{product.description}</p>
         <div className="flex items-center justify-between">
-          <Button>مشاهده بیشتر &larr;</Button>
+          <Link to={`/product/${product._id}`} className="cursor-pointer">
+            <Button>مشاهده بیشتر &larr;</Button>
+          </Link>
           <div className="p-2">
             <CartIcon />
           </div>
