@@ -5,16 +5,12 @@ import { useCategory } from "../../hooks/useCategory";
 import Badge from "./Badge";
 import Button from "./button";
 import FavoriteButton from "./FavoriteButton";
-import { useFavorites } from "../../stores/use-favorites-store";
 
 interface ProductLayoutFullProps {
   product: ProductType;
 }
 const ProductLayoutFull = ({ product }: ProductLayoutFullProps) => {
   const { isError, isLoading, data: category } = useCategory(product.category);
-  const isFavorite = useFavorites((state) => state.favorites).includes(
-    product._id,
-  );
 
   return (
     <figure className="bg-bgCard max-w-96 overflow-hidden rounded-lg">
@@ -26,11 +22,7 @@ const ProductLayoutFull = ({ product }: ProductLayoutFullProps) => {
             alt={product.name}
           />
         </Link>
-        <FavoriteButton
-          _id={product._id}
-          isFavorite={isFavorite}
-          className="absolute top-3 right-3"
-        />
+        <FavoriteButton _id={product._id} className="absolute top-3 right-3" />
         <Badge
           className="absolute right-2 bottom-2"
           text={isError ? "error" : isLoading ? "loading" : category.name}

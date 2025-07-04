@@ -1,22 +1,17 @@
-import { useState } from "react";
 import { Favorite } from "../../assets/icons";
 import { useFavorites } from "../../stores/use-favorites-store";
 
 interface FavoriteButtonI {
   _id: string;
-  isFavorite?: boolean;
+
   className?: string;
 }
-const FavoriteButton = ({
-  _id,
-  isFavorite = false,
-  className = "",
-}: FavoriteButtonI) => {
-  const [favorite, setFavorite] = useState(isFavorite);
+const FavoriteButton = ({ _id, className = "" }: FavoriteButtonI) => {
   const toggleFavorites = useFavorites((state) => state.toggleFavorites);
+  const favorites = useFavorites((state) => state.favorites);
+  const favorite = favorites.includes(_id);
   const handleFavorites = () => {
     toggleFavorites(_id);
-    setFavorite((prev) => !prev);
   };
   return (
     <button
