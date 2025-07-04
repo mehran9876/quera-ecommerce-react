@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Favorite } from "../../assets/icons";
+import { useFavorites } from "../../stores/use-favorites-store";
 
 interface FavoriteButtonI {
   _id: string;
@@ -9,12 +10,12 @@ interface FavoriteButtonI {
 const FavoriteButton = ({
   _id,
   isFavorite = false,
-
   className = "",
 }: FavoriteButtonI) => {
   const [favorite, setFavorite] = useState(isFavorite);
+  const toggleFavorites = useFavorites((state) => state.toggleFavorites);
   const handleFavorites = () => {
-    console.log(`_id: ${_id} favorite: ${favorite}`);
+    toggleFavorites(_id);
     setFavorite((prev) => !prev);
   };
   return (
