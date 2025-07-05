@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../utils/axios";
 
-export const useCategory = (_id: string) => {
+export const useGetCategory = (_id: string) => {
   return useQuery({
     queryKey: ["category", _id],
     queryFn: () =>
