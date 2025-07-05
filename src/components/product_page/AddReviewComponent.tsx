@@ -10,10 +10,10 @@ const AddReviewComponent = () => {
   const { mutate, isPending, isError } = useCreateReview(productId!);
 
   const handleCreateReview = () => {
-    if (!userReview) return console.log("error");
+    if (!userReview) return console.error("error");
 
     if (isPending) return console.log("loading");
-    if (isError) return console.log("error");
+    if (isError) return console.error("error");
 
     mutate(
       {
@@ -38,7 +38,7 @@ const AddReviewComponent = () => {
       }}
     >
       <div className="flex flex-col gap-2">
-        <label htmlFor=" review-rate">امتیاز</label>
+        <label htmlFor="review-rate">امتیاز</label>
         <select
           className="select w-full"
           name="review-rate"
