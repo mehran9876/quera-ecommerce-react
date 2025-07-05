@@ -5,7 +5,7 @@ export const PageLayout = () => {
   const sidebarExpanded = false;
   return (
     <div
-      className={`grid h-screen ${sidebarExpanded ? "grid-cols-[1fr_4fr]" : "grid-cols-[72px_1fr]"} gap-4`}
+      className={`grid h-screen ${sidebarExpanded ? "grid-cols-[1fr_4fr]" : "grid-cols-[72px_1fr]"}`}
     >
       <aside
         className={`fixed top-0 right-0 h-screen ${sidebarExpanded ? "w-1/5" : "w-18"}`}

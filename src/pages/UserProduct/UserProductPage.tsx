@@ -7,7 +7,8 @@ import {
   ShopFullIcon,
   StarIcon,
 } from "../../assets/icons";
-import { useLoaderData } from "react-router";
+import { NavLink, Outlet, useLoaderData } from "react-router-dom";
+import FavoriteButton from "../../components/general/FavoriteButton";
 
 const UserProductPage = () => {
   const [quantity, setQuantity] = React.useState(1);
@@ -19,16 +20,20 @@ const UserProductPage = () => {
   const productPrice = Intl.NumberFormat("fa-IR").format(productObj.price);
 
   return (
-    <section>
-      <div className="mb-16 grid grid-cols-10 gap-12">
-        <div className="col-span-4 flex aspect-square items-center justify-center overflow-hidden rounded-lg bg-white p-12">
+    <section className="relative mt-24 mr-13">
+      <div className="mb-16 grid max-w-4/5 grid-cols-10 gap-29">
+        <FavoriteButton
+          _id={productObj._id}
+          className="absolute top-2 left-20"
+        />
+        <div className="col-span-5 flex aspect-square items-center justify-center overflow-hidden rounded-lg bg-white p-12">
           <img
             className="object-fill"
             src={productObj.image}
             alt={productObj.name}
           />
         </div>
-        <div className="col-span-6 flex flex-col justify-between">
+        <div className="col-span-5 flex flex-col justify-between">
           <h1 className="text-2xl font-medium">{productObj.name}</h1>
           <p>{productObj.description}</p>
           <p className="text-5xl font-medium">{productPrice} تومان</p>
@@ -79,7 +84,7 @@ const UserProductPage = () => {
               quantity
             </label>
             <select
-              className="bg-bgInput border-inputBorder h-10 min-w-24 rounded-lg border p-2 pl-3"
+              className="bg-bgInput border-inputBorder flex min-w-24 rounded-lg border p-1 pl-3"
               dir="ltr"
               name="quantity"
               id="quantity"
@@ -102,19 +107,44 @@ const UserProductPage = () => {
         </div>
       </div>
 
-      <div className="mr-47">
-        <div>
+      <div className="mr-47 grid max-w-3/5 grid-cols-10">
+        <div className="col-span-2">
           <ul className="menu gap-6">
             <li>
-              <a href="#">ثبت نظر</a>
+              <NavLink
+                to={"."}
+                end
+                className={({ isActive }) =>
+                  `${isActive ? "text-primaryPink" : ""}`
+                }
+              >
+                ثبت نظر
+              </NavLink>
             </li>
             <li>
-              <a href="#">مشاهده نظرات</a>
+              <NavLink
+                to={"comments"}
+                className={({ isActive }) =>
+                  `${isActive ? "text-primaryPink" : ""}`
+                }
+              >
+                مشاهده نظرات
+              </NavLink>
             </li>
             <li>
-              <a href="#">محصولات مرتبط</a>
+              <NavLink
+                to={"related"}
+                className={({ isActive }) =>
+                  `${isActive ? "text-primaryPink" : ""}`
+                }
+              >
+                محصولات مرتبط
+              </NavLink>
             </li>
           </ul>
+        </div>
+        <div className="col-span-8 mr-37">
+          <Outlet />
         </div>
       </div>
     </section>

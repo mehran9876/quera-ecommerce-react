@@ -8,6 +8,7 @@ import UserCartPage from "./pages/userCartPage";
 import AdminUsersPage from "./pages/AdminUsersPage";
 import axiosInstance from "./utils/axios";
 import UserShopPage from "./pages/userShopPage/userShopPage";
+import AddReviewComponent from "./components/product_page/addReviewComponent";
 
 // react query
 // 1. Create a client
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
           await axiosInstance(`/api/products/${params.productId}`).then(
             (res) => res.data,
           ),
+        children: [
+          { index: true, element: <AddReviewComponent /> },
+          { path: "comments", element: <h1>comments</h1> },
+          { path: "related", element: <h1>related</h1> },
+        ],
       },
       {
         path: "*",
