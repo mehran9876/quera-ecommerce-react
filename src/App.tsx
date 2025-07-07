@@ -8,7 +8,7 @@ import UserCartPage from "./pages/userCartPage";
 import AdminUsersPage from "./pages/AdminUsersPage";
 import axiosInstance from "./utils/axios";
 import UserShopPage from "./pages/userShopPage/userShopPage";
-import AddReviewComponent from "./components/product_page/addReviewComponent";
+import AddReviewComponent from "./components/product_page/AddReviewComponent";
 
 // react query
 // 1. Create a client

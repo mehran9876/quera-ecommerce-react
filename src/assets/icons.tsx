@@ -3,7 +3,7 @@
  * ShopIcon
  * CartIcon
  * HeartIcon
- * LeftArrowIcon
+ * ArrowIcon (directions = "left" | "right" | "up" | "down")
  * LoginIcon
  * SignupIcon
  * Chevron
@@ -104,24 +104,35 @@ export const HeartIcon = () => (
   </svg>
 );
 
-export const LeftArrowIcon = () => (
-  <svg
-    width="14.000000"
-    height="10.008179"
-    viewBox="0 0 14 10.0082"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M13 5L1 5M5 9L1 5L5 1"
-      stroke="currentColor"
-      strokeOpacity="1.000000"
-      strokeWidth="2.000000"
-      strokeLinejoin="round"
-      strokeLinecap="round"
-    />
-  </svg>
-);
+export const ArrowIcon = ({
+  direction,
+}: {
+  direction: "left" | "right" | "up" | "down";
+}) => {
+  const rotate = {
+    left: "rotate-180",
+    right: "",
+    up: "rotate-90",
+    down: "-rotate-90",
+  };
+
+  return (
+    <svg
+      viewBox="0 0 14 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`h2.5 w-3.5 stroke-current ${rotate[direction]}`}
+    >
+      <path
+        d="M13 5L1 5M5 9L1 5L5 1"
+        strokeOpacity="1.000000"
+        strokeWidth="2.000000"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};
 
 export const LoginIcon = () => (
   <svg
