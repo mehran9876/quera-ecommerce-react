@@ -106,8 +106,10 @@ export const HeartIcon = () => (
 
 export const ArrowIcon = ({
   direction = "left",
+  className = "",
 }: {
   direction?: "left" | "right" | "up" | "down";
+  className?: string;
 }) => {
   const rotate = {
     left: "rotate",
@@ -121,7 +123,7 @@ export const ArrowIcon = ({
       viewBox="0 0 14 10"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`h2.5 w-3.5 stroke-current ${rotate[direction]}`}
+      className={`h-2.5 w-3.5 stroke-current ${rotate[direction]} ${className}`}
     >
       <path
         d="M13 5L1 5M5 9L1 5L5 1"
