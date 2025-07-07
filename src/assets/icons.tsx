@@ -105,12 +105,12 @@ export const HeartIcon = () => (
 );
 
 export const ArrowIcon = ({
-  direction,
+  direction = "left",
 }: {
-  direction: "left" | "right" | "up" | "down";
+  direction?: "left" | "right" | "up" | "down";
 }) => {
   const rotate = {
-    left: "rotate-180",
+    left: "rotate",
     right: "",
     up: "rotate-90",
     down: "-rotate-90",
