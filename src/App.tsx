@@ -9,6 +9,7 @@ import AdminUsersPage from "./pages/AdminUsersPage";
 import axiosInstance from "./utils/axios";
 import UserShopPage from "./pages/userShopPage/userShopPage";
 import AddReviewComponent from "./components/product_page/AddReviewComponent";
+import UserHomePage from "./pages/UserHomePage";
 
 // react query
 // 1. Create a client
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
   {
     element: <PageLayout />,
     children: [
-      { index: true, element: <h1>Home Page</h1> },
+      { index: true, element: <UserHomePage /> },
       { path: "login", element: <Login /> },
       { path: "signup", element: <Register /> },
       {
