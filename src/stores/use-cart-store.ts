@@ -1,16 +1,5 @@
 import { create } from "zustand";
-
-interface CartItem {
-  _id: string;
-  quantity: number;
-}
-
-interface CartStateI {
-  cart: CartItem[];
-  addToCart: (productId: string, quantity?: number) => void;
-  changeQuantity: (productId: string, quantity: number) => void;
-  removeFromCart: (productId: string) => void;
-}
+import type { CartItem, CartStateI } from "../types/cartTypes";
 
 function getCartFromStorage(): CartItem[] {
   try {

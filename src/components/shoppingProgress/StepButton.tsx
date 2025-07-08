@@ -1,16 +1,13 @@
-const StepButton = ({
-  active,
-  onClick,
-  children,
-}: {
+interface StepButtonI extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) => {
+}
+
+const StepButton = ({ active, disabled, onClick, children }: StepButtonI) => {
   return (
     <button
       onClick={onClick}
-      className="flex cursor-pointer flex-col items-center gap-2"
+      className={`flex ${!disabled ? "cursor-pointer" : ""} flex-col items-center gap-2`}
+      disabled={disabled}
     >
       <span className={`w-max ${active ? "text-green-400" : "text-gray-400"}`}>
         {children}

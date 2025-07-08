@@ -17,10 +17,10 @@ const Input = ({
   ...rest
 }: InputProps) => {
   return (
-    <>
+    <div className="flex flex-col gap-2">
       <label
         htmlFor={id}
-        className={`label text-primaryFont mb-2 block ${label ? "" : "hidden"}`}
+        className={`label text-primaryFont block ${label ? "" : "hidden"}`}
       >
         {label}
       </label>
@@ -34,7 +34,7 @@ const Input = ({
         className={`input focus:border-inputOutline w-full focus:outline-0 ${inputSize === "md" ? "input-md" : "input-sm"} ${className} `}
         {...rest}
       />
-    </>
+    </div>
   );
 };
 
