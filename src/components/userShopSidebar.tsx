@@ -52,7 +52,7 @@ const UserShopSidebar = () => {
         {isError && <p>error</p>}
         {!isError &&
           !isLoading &&
-          categories!.map((category: CategoryType) => (
+          categories?.map((category: CategoryType) => (
             <Checkbox
               onChange={handleCategoryChange}
               key={category._id}

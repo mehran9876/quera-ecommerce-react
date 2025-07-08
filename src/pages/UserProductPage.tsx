@@ -47,7 +47,8 @@ const UserProductPage = () => {
             <p className="flex items-center gap-2">
               <ShopFullIcon />
               <span className="text-placeholder">برند:</span>
-              <span>{productObj.rating}</span>
+              {/* NOTE: needs to be replaced with brand name after api call */}
+              <span>{productObj.name}</span>
             </p>
             <p className="flex items-center gap-2">
               <CartFullIcon />

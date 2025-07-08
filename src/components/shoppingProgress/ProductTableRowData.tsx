@@ -25,13 +25,13 @@ const ProductTableData = ({
 
   if (isLoading)
     return (
-      <tr aria-colspan={5}>
+      <tr colspan={5}>
         <td>loading...</td>
       </tr>
     );
   if (isError)
     return (
-      <tr aria-colspan={5}>
+      <tr colspan={5}>
         <td>{error.message}</td>
       </tr>
     );
