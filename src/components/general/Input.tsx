@@ -1,11 +1,7 @@
-interface InputProps {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  placeholder?: string;
   label?: string;
-  size?: "md" | "sm";
-  type?: "text" | "number" | "password" | "email" | "file" | "date";
-  value?: string | number;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputSize?: "md" | "sm";
   className?: string;
 }
 
@@ -13,11 +9,12 @@ const Input = ({
   id,
   placeholder = "",
   label = "",
-  size = "md",
+  inputSize = "md",
   type = "text",
   value = "",
   onChange = () => null,
   className = "",
+  ...rest
 }: InputProps) => {
   return (
     <>
@@ -34,7 +31,8 @@ const Input = ({
         value={value}
         onChange={(e) => onChange(e)}
         placeholder={placeholder}
-        className={`input focus:border-inputOutline w-full focus:outline-0 ${size === "md" ? "input-md" : "input-sm"} ${className} `}
+        className={`input focus:border-inputOutline w-full focus:outline-0 ${inputSize === "md" ? "input-md" : "input-sm"} ${className} `}
+        {...rest}
       />
     </>
   );

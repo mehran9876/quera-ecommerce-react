@@ -1,21 +1,21 @@
-import React from "react";
-import Button from "../../components/general/button";
+import { useState } from "react";
+import { useCartStore } from "../stores/use-cart-store";
+import Button from "../components/general/button";
+import { NavLink, Outlet, useLoaderData } from "react-router-dom";
+import FavoriteButton from "../components/general/FavoriteButton";
 import {
   BoxIcon,
   CartFullIcon,
   ClockIcon,
   ShopFullIcon,
   StarIcon,
-} from "../../assets/icons";
-import { NavLink, Outlet, useLoaderData } from "react-router-dom";
-import FavoriteButton from "../../components/general/FavoriteButton";
+} from "../assets/icons";
 
 const UserProductPage = () => {
-  const [quantity, setQuantity] = React.useState(1);
-
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCartStore();
   // react router loader
   const productObj = useLoaderData();
-
   // derived states
   const productPrice = Intl.NumberFormat("fa-IR").format(productObj.price);
 
@@ -100,7 +100,10 @@ const UserProductPage = () => {
             </select>
           </div>
           <div className="w-max cursor-pointer justify-self-end">
-            <Button disabled={productObj.countInStock === 0}>
+            <Button
+              disabled={productObj.countInStock === 0}
+              onClick={() => addToCart(productObj._id, quantity)}
+            >
               افزودن به سبد
             </Button>
           </div>
