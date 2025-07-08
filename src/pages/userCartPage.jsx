@@ -29,21 +29,21 @@ const UserCartPage = (props) => {
     <div className="mx-auto w-8/10">
       <ul>
         {cartItems.map((item) => (
-          <li key={item.id} className="flex m-4">
-            <div className="ml-4 rounded-sm w-[88px] h-[88px] object-contain overflow-hidden">
+          <li key={item.id} className="m-4 flex">
+            <div className="ml-4 h-[88px] w-[88px] overflow-hidden rounded-sm object-contain">
               {item.image}
             </div>
-            <div className="flex flex-col gap-2 w-7/10 font-iranYekan text-base text-right align-middle">
+            <div className="font-iranYekan flex w-7/10 flex-col gap-2 text-right align-middle text-base">
               <p className="text-primaryPink">{item.name}</p>
               <p className="text-primaryFont">{item.brand}</p>
-              <p className="font-bold text-primaryFont">
+              <p className="text-primaryFont font-bold">
                 {formatPersianNumber(item.price)}
                 <span className="pr-2">تومان</span>
               </p>
             </div>
-            <div className="flex justify-center items-center gap-3">
+            <div className="flex items-center justify-center gap-3">
               <select
-                className="p-1 border-select rounded-sm w-20"
+                className="border-select w-20 rounded-sm p-1"
                 value={item.quantity}
                 onChange={(e) => quantityChangeHandler(item.id, e.target.value)}
               >
@@ -60,11 +60,11 @@ const UserCartPage = (props) => {
           </li>
         ))}
       </ul>
-      <div className="flex flex-col justify-center items-right gap-2 pr-10 w-1/2 font-iranYekan text-right">
+      <div className="items-right font-iranYekan flex w-1/2 flex-col justify-center gap-2 pr-10 text-right">
         <p className="text-primaryFont text-xl">
           تعداد ({formatPersianNumber(totalItems)})
         </p>
-        <p className="font-bold text-primaryFont text-2xl">
+        <p className="text-primaryFont text-2xl font-bold">
           {formatPersianNumber(totalPrice)} تومان
         </p>
         <Button>تکمیل خرید</Button>

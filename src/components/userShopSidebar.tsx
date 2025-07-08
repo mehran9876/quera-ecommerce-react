@@ -1,9 +1,9 @@
 import { useSearchParams } from "react-router-dom";
-import Checkbox from "../../components/general/Checkbox";
-import Input from "../../components/general/Input";
-import { SidebarHeading } from "../../components/SidebarHeading";
-import axiosInstance from "../../utils/axios";
-import type { CategoryType } from "../../types/categoryType";
+import Checkbox from "./general/Checkbox";
+import Input from "./general/Input";
+import { SidebarHeading } from "./SidebarHeading";
+import axiosInstance from "../utils/axios";
+import type { CategoryType } from "../types/categoryType";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -52,7 +52,7 @@ const UserShopSidebar = () => {
         {isError && <p>error</p>}
         {!isError &&
           !isLoading &&
-          categories!.map((category: CategoryType) => (
+          categories?.map((category: CategoryType) => (
             <Checkbox
               onChange={handleCategoryChange}
               key={category._id}
