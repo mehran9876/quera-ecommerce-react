@@ -1,8 +1,8 @@
-import ProductLayoutFull from "../../components/general/ProductLayoutFull";
-import UserShopSidebar from "./userShopSidebar";
-import type { ProductType } from "../../types/productType";
+import ProductLayoutFull from "../components/general/ProductLayoutFull";
+import UserShopSidebar from "../components/userShopSidebar";
+import type { ProductType } from "../types/productType";
 import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "../../utils/axios";
+import axiosInstance from "../utils/axios";
 import { useSearchParams } from "react-router";
 
 const UserShopPage = () => {

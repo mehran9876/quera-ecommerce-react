@@ -1,14 +1,16 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PageLayout } from "./layouts/PageLayout";
-import UserProductPage from "./pages/UserProduct/UserProductPage";
+import UserProductPage from "./pages/UserProductPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import UserCartPage from "./pages/userCartPage";
 import AdminUsersPage from "./pages/AdminUsersPage";
 import axiosInstance from "./utils/axios";
-import UserShopPage from "./pages/userShopPage/userShopPage";
+import UserShopPage from "./pages/userShopPage";
 import AddReviewComponent from "./components/product_page/AddReviewComponent";
+import UserHomePage from "./pages/UserHomePage";
+import UserShoppingProgressPage from "./pages/UserShoppingProgressPage";
 
 // react query
 // 1. Create a client
@@ -19,7 +21,7 @@ const router = createBrowserRouter([
   {
     element: <PageLayout />,
     children: [
-      { index: true, element: <h1>Home Page</h1> },
+      { index: true, element: <UserHomePage /> },
       { path: "login", element: <Login /> },
       { path: "signup", element: <Register /> },
       {
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
         children: [
           { path: "cart", element: <UserCartPage /> },
           { path: "favorites", element: <h1>Favorites page</h1> },
+          {
+            path: "payout",
+            Component: UserShoppingProgressPage,
+          },
         ],
       },
       {
