@@ -1,16 +1,24 @@
+import { useState } from "react";
+
 const ThemeSwitch = () => {
+  const [theme, setTheme] = useState(
+    document.documentElement.dataset.theme || "light",
+  );
+
   const handleThemeChange = () => {
-    const theme = document.documentElement;
-    theme.dataset.theme = theme.dataset.theme === "light" ? "dark" : "light";
-    theme.classList.toggle("dark");
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    document.documentElement.dataset.theme = newTheme;
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
+
   return (
     <label className="btn swap swap-rotate mb-8 rounded-sm border-transparent bg-transparent p-2 text-base">
       {/* this hidden checkbox controls the state */}
       <input
         type="checkbox"
         className="theme-controller"
-        value="synthwave"
+        value="dark"
         onChange={handleThemeChange}
       />
 
