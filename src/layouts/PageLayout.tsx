@@ -1,6 +1,6 @@
 import { SidebarLayout } from "./Sidebar/SidebarLayout";
 import { Outlet } from "react-router-dom";
-
+import HamburgerMenu from "../components/general/HamburgerMenu";
 export const PageLayout = () => {
   const sidebarExpanded = false;
   return (
@@ -12,8 +12,9 @@ export const PageLayout = () => {
       >
         <SidebarLayout />
       </aside>
-      <main className="z-0 col-start-2 overflow-scroll">
+      <main className="z-0 col-start-2 overflow-scroll relative">
         <Outlet />
+        <div className="absolute top-0 left-0"><HamburgerMenu/> </div>
       </main>
     </div>
   );
