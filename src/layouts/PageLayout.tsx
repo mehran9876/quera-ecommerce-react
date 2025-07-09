@@ -8,11 +8,11 @@ export const PageLayout = () => {
       className={`grid h-screen ${sidebarExpanded ? "grid-cols-[1fr_4fr]" : "grid-cols-[72px_1fr]"}`}
     >
       <aside
-        className={`fixed top-0 right-0 h-screen ${sidebarExpanded ? "w-1/5" : "w-18"}`}
+        className={`fixed top-0 right-0 z-20 h-screen ${sidebarExpanded ? "w-1/5" : "w-18"}`}
       >
-        <SidebarLayout expanded={sidebarExpanded} />
+        <SidebarLayout />
       </aside>
-      <main className="col-start-2 overflow-scroll">
+      <main className="z-0 col-start-2 overflow-scroll">
         <Outlet />
       </main>
     </div>

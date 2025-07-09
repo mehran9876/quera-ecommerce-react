@@ -1,31 +1,17 @@
 import ProductLayoutFull from "../components/general/ProductLayoutFull";
 import UserShopSidebar from "../components/userShopSidebar";
 import type { ProductType } from "../types/productType";
-import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "../utils/axios";
 import { useSearchParams } from "react-router";
+import { useGetFilteredProducts } from "../hooks/useGetFilteredProducts";
 
 const UserShopPage = () => {
   const [filters] = useSearchParams();
-  const payload = {
-    categories: filters.getAll("categories") || [],
-    price: [
-      filters.get("minPrice") || "0",
-      filters.get("maxPrice") || "200000000000",
-    ],
-  };
 
   const {
     data: products,
     isPending,
     isError,
-  } = useQuery({
-    queryKey: ["products", filters.toString()],
-    queryFn: () =>
-      axiosInstance
-        .post(`/api/products/filtered`, payload)
-        .then((res) => res.data),
-  });
+  } = useGetFilteredProducts(filters);
 
   return (
     <section className="mt-5 mr-20 ml-20 flex">
