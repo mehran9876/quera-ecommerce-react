@@ -3,6 +3,7 @@ import { useCartStore } from "../stores/use-cart-store";
 import Button from "../components/general/button";
 import { NavLink, Outlet, useLoaderData } from "react-router-dom";
 import FavoriteButton from "../components/general/FavoriteButton";
+import persianNumberFormatter from "../utils/persianNumberFormatter";
 import {
   BoxIcon,
   CartFullIcon,
@@ -10,14 +11,29 @@ import {
   ShopFullIcon,
   StarIcon,
 } from "../assets/icons";
+import RatingStars from "../components/general/RatingStars";
+import { useGetCategory } from "../hooks/useGetCategory";
 
 const UserProductPage = () => {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCartStore();
   // react router loader
   const productObj = useLoaderData();
-  // derived states
+
   const productPrice = Intl.NumberFormat("fa-IR").format(productObj.price);
+
+  const lastUpdateDayAgo =
+    (Date.now() - Date.parse(productObj.updatedAt)) / 86400000;
+  let lastUpdatedText = "";
+  if (lastUpdateDayAgo < 1) {
+    lastUpdatedText = "امروز";
+  } else if (lastUpdateDayAgo < 2) {
+    lastUpdatedText = "دیروز";
+  } else if (lastUpdateDayAgo < 7) {
+    lastUpdatedText = `${persianNumberFormatter(Math.floor(lastUpdateDayAgo))} روز پیش`;
+  } else {
+    lastUpdatedText = `${persianNumberFormatter(Math.floor(lastUpdateDayAgo))} هفته پیش`;
+  }
 
   return (
     <section className="relative mt-24 mr-13">
@@ -42,45 +58,44 @@ const UserProductPage = () => {
             <p className="flex items-center gap-2">
               <StarIcon />
               <span className="text-placeholder">امتیاز:</span>
-              <span>{productObj.rating}</span>
+              <span>
+                {persianNumberFormatter(productObj.rating.toFixed(1))}
+              </span>
             </p>
             <p className="flex items-center gap-2">
               <ShopFullIcon />
               <span className="text-placeholder">برند:</span>
               {/* NOTE: needs to be replaced with brand name after api call */}
-              <span>{productObj.name}</span>
+              <span>{useGetCategory(productObj.category).data?.name}</span>
             </p>
             <p className="flex items-center gap-2">
               <CartFullIcon />
               <span className="text-placeholder">تعداد:</span>
-              <span>{productObj.countInStock}</span>
+              <span>{persianNumberFormatter(productObj.countInStock)}</span>
             </p>
             <p className="font-iranYekan flex items-center gap-2">
               <ClockIcon />
               <span className="text-placeholder">زمان بروز رسانی:</span>
-              <span>
-                {(
-                  (Date.now() - Date.parse(productObj.updatedAt)) /
-                  86400000
-                ).toFixed(0)}{" "}
-                روز پیش
-              </span>
+              <span>{lastUpdatedText}</span>
             </p>
             <p className="flex items-center gap-2">
               <BoxIcon />
               <span className="text-placeholder">موجودی:</span>
-              <span>{productObj.countInStock}</span>
+              <span>{persianNumberFormatter(productObj.countInStock)}</span>
             </p>
             <p className="flex items-center gap-2">
               <StarIcon />
               <span className="text-placeholder">نظرات:</span>
-              <span>{productObj.reviews?.length}</span>
+              <span>{persianNumberFormatter(productObj.reviews?.length)}</span>
             </p>
           </div>
           <div className="flex items-center justify-between">
-            <p>
-              <span>{productObj.reviews?.length} نظر</span>
-            </p>
+            <div className="flex items-center gap-4">
+              <span>
+                {persianNumberFormatter(productObj.reviews?.length)} نظر
+              </span>
+              <RatingStars rate={productObj.rating} />
+            </div>
             <label className="hidden" htmlFor="quantity">
               quantity
             </label>
@@ -111,7 +126,7 @@ const UserProductPage = () => {
         </div>
       </div>
 
-      <div className="mr-47 grid max-w-3/5 grid-cols-10">
+      <div className="mr-47 grid w-5/7 grid-cols-10">
         <div className="col-span-2">
           <ul className="menu gap-6">
             <li>
@@ -147,8 +162,8 @@ const UserProductPage = () => {
             </li>
           </ul>
         </div>
-        <div className="col-span-8 mr-37">
-          <Outlet />
+        <div className="col-span-8 mr-20">
+          <Outlet context={productObj.reviews} />
         </div>
       </div>
     </section>

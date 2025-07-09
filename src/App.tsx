@@ -11,6 +11,7 @@ import UserShopPage from "./pages/userShopPage";
 import AddReviewComponent from "./components/product_page/AddReviewComponent";
 import UserHomePage from "./pages/UserHomePage";
 import UserShoppingProgressPage from "./pages/UserShoppingProgressPage";
+import UserProductReviews from "./components/product_page/UserProductReviews";
 
 // react query
 // 1. Create a client
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
           ),
         children: [
           { index: true, element: <AddReviewComponent /> },
-          { path: "comments", element: <h1>comments</h1> },
+          { path: "comments", element: <UserProductReviews /> },
           { path: "related", element: <h1>related</h1> },
         ],
       },

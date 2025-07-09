@@ -1,9 +1,12 @@
 import React from "react";
 import Button from "../general/button";
 import { useCreateReview } from "../../hooks/useCreateReview";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 
 const AddReviewComponent = () => {
+  // !NOTE: dummy data replace with real user _id later
+  const _id = "adcunada";
+
   const [userRate, setUserRate] = React.useState(1);
   const [userReview, setUserReview] = React.useState("");
   const { productId } = useParams();
@@ -28,6 +31,21 @@ const AddReviewComponent = () => {
       },
     );
   };
+
+  if (!_id)
+    return (
+      <div className="flex h-full flex-col items-center justify-center gap-5">
+        <p>ابتدا باید وارد حساب خود شوید</p>
+        <div className="flex gap-3">
+          <Link className="btn bg-primaryPink" to="/login">
+            ورود
+          </Link>
+          <Link className="btn bg-primaryPink" to="/register">
+            ثبت نام
+          </Link>
+        </div>
+      </div>
+    );
 
   return (
     <form
