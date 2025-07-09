@@ -3,6 +3,7 @@ import LoginImage2 from "../assets/LoginImage2.png";
 import Input from "../components/general/Input";
 import Button from "../components/general/button";
 import { SidebarLayout } from "../layouts/Sidebar/SidebarLayout";
+import axios from "../utils/axios";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -11,7 +12,10 @@ export default function Register() {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [sidebarExpanded, setSidebarExpanded] = useState("");
 
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !email || !password || !repeatPassword) {
       alert("لطفاً همه فیلدها را پر کنید.");
@@ -21,6 +25,22 @@ export default function Register() {
     if (password !== repeatPassword) {
       alert("رمز عبور و تکرار آن مطابقت ندارند.");
       return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+      const res = await axios.post("/api/users/register", {
+        name,
+        email,
+        password,
+      });
+      console.log("✅ Register success:", res.data);
+    } catch (err) {
+      setError(err.response?.data?.message || "ثبت‌نام ناموفق بود.");
+      console.error("❌ Register error:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -33,6 +53,8 @@ export default function Register() {
       </aside>
       <form onSubmit={handleSubmit} className="m-10 mr-25">
         <h1 className="mb-6 text-2xl font-bold text-white">ثبت نام</h1>
+
+        {error && <p className="text-red-500 mb-4">{error}</p>} {/* ✅ Error Display */}
 
         <div className="mb-6">
           <Input
@@ -69,7 +91,7 @@ export default function Register() {
         <div>
           <Input
             className="w-md"
-            id="registerPassword"
+            id="registerPasswordRepeat"
             type="password"
             label="تکرار رمز عبور"
             placeholder="رمز عبور خود را دوباره وارد نمایید"
@@ -80,8 +102,9 @@ export default function Register() {
         <Button
           type="submit"
           className="bg-primaryPink mt-6 mb-6 w-16 cursor-pointer rounded-lg p-3"
+          disabled={loading}
         >
-          ورود
+          {loading ? "در حال ثبت‌نام..." : "ورود"}
         </Button>
 
         <div className="flex">
