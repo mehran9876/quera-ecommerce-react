@@ -5,6 +5,7 @@ import { useGetCategory } from "../../hooks/useGetCategory";
 import Badge from "./Badge";
 import Button from "./button";
 import FavoriteButton from "./FavoriteButton";
+import { useCartStore } from "../../stores/use-cart-store";
 
 interface ProductLayoutFullProps {
   product: ProductType;
@@ -15,6 +16,10 @@ const ProductLayoutFull = ({ product }: ProductLayoutFullProps) => {
     isLoading,
     data: category,
   } = useGetCategory(product.category);
+  const { addToCart } = useCartStore();
+  const handleAddToCart = () => {
+    addToCart(product._id);
+  };
 
   return (
     <figure className="bg-bgCard max-w-96 overflow-hidden rounded-lg">
@@ -46,7 +51,10 @@ const ProductLayoutFull = ({ product }: ProductLayoutFullProps) => {
           <Link to={`/product/${product._id}`} className="cursor-pointer">
             <Button>مشاهده بیشتر &larr;</Button>
           </Link>
-          <button className="btn btn-ghost aspect-square rounded-lg border-0 bg-transparent p-0">
+          <button
+            className="btn btn-ghost aspect-square rounded-lg border-0 bg-transparent p-0"
+            onClick={handleAddToCart}
+          >
             <CartIcon />
           </button>
         </div>
