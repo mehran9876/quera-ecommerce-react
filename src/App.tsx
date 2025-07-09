@@ -12,6 +12,8 @@ import AddReviewComponent from "./components/product_page/AddReviewComponent";
 import UserHomePage from "./pages/UserHomePage";
 import UserShoppingProgressPage from "./pages/UserShoppingProgressPage";
 import UserProductReviews from "./components/product_page/UserProductReviews";
+import AdminOrders from "./pages/AdminOrders";
+import AdminOrderDetailed from "./pages/AdminOrderDetailed";
 
 // react query
 // 1. Create a client
@@ -50,6 +52,16 @@ const router = createBrowserRouter([
             errorElement: <p>error</p>,
             loader: async () =>
               await axiosInstance(`/api/users`).then((res) => res.data),
+          },
+          { path: "orders", Component: AdminOrders },
+          {
+            path: "orders/:orderID",
+            Component: AdminOrderDetailed,
+            // loader: async (param) =>
+            //   await axiosInstance(`/api/orders/${param}`).then(
+            //     (res) => res.data,
+            //   ),
+            errorElement: <p>error</p>,
           },
         ],
       },
