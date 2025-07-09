@@ -2,11 +2,13 @@ import { useEffect } from "react";
 import { useGetProduct } from "../../hooks/useGetProduct";
 import { useCartStore } from "../../stores/use-cart-store";
 import Input from "../general/Input";
+import type { AxiosError } from "axios";
 
 interface ProductTableDataProps {
   product: { _id: string; quantity: number };
   handleTotalPrice: (priceSum: number) => void;
 }
+
 const ProductTableData = ({
   product,
   handleTotalPrice,
@@ -18,21 +20,27 @@ const ProductTableData = ({
     error,
   } = useGetProduct(product._id);
 
-  const { changeQuantity: handleQuantityChange } = useCartStore();
+  const { changeQuantity: handleQuantityChange, removeFromCart } =
+    useCartStore();
   useEffect(() => {
     if (productObj) handleTotalPrice(productObj.price * product.quantity);
   }, [productObj, handleTotalPrice, product.quantity]);
 
+  useEffect(() => {
+    if (isError && (error as AxiosError).response?.status === 404)
+      removeFromCart(product._id);
+  }, [isError, error, removeFromCart, product._id]);
+
   if (isLoading)
     return (
-      <tr colspan={5}>
-        <td>loading...</td>
+      <tr>
+        <td colSpan={5}>loading...</td>
       </tr>
     );
   if (isError)
     return (
-      <tr colspan={5}>
-        <td>{error.message}</td>
+      <tr>
+        <td colSpan={5}>{error.message}</td>
       </tr>
     );
 
