@@ -44,7 +44,7 @@ const UserShopSidebar = () => {
 
   return (
     <div
-      className={`ml-[40px] flex h-[810px] w-[264px] flex-col gap-[28px] bg-[#151515] p-2`}
+      className={`bg-bgFilterMenu ml-[40px] flex h-max w-[264px] flex-col gap-[28px] rounded-sm px-2 py-8`}
     >
       <SidebarHeading>فیلتر برند</SidebarHeading>
       <div className={`flex flex-col gap-4 pr-5`}>
@@ -86,7 +86,7 @@ const UserShopSidebar = () => {
           />
           <button
             type="submit"
-            className={`btn bg-primaryPink mx-5 w-full rounded-sm border px-0.5 py-0.5 text-center`}
+            className={`btn bg-primaryPink mx-5 w-full rounded-sm border px-0.5 py-0.5 text-center text-white`}
           >
             جستجو
           </button>
@@ -94,7 +94,7 @@ const UserShopSidebar = () => {
       </div>
 
       <button
-        className={`btn bg-primaryPink mx-5 rounded-sm border px-0.5 py-0.5 text-center`}
+        className={`btn bg-primaryPink mx-5 rounded-sm border px-0.5 py-0.5 text-center text-white`}
         onClick={() => {
           setFilters({});
         }}

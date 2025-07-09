@@ -39,9 +39,10 @@ const ProductLayoutFull = ({ product }: ProductLayoutFullProps) => {
       </div>
       <div className="p-5">
         <div className="flex items-center justify-between">
-          <h4 className="text-xl">{product.name}</h4>
-          <span className="text-primaryPink">
-            {Intl.NumberFormat("fa-IR").format(product.price)} تومان
+          <h4 className="line-clamp-1 text-lg">{product.name}</h4>
+          <span className="text-primaryPink w-max space-x-1">
+            <span>{Intl.NumberFormat("fa-IR").format(product.price)}</span>
+            <span className="text-xs">تومان</span>
           </span>
         </div>
         <p className={`mb-3 line-clamp-2 min-h-12 text-[#9CA3AF]`}>

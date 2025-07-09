@@ -21,23 +21,12 @@ export const SidebarItem = ({
       <NavLink
         to={to}
         className={({ isActive }) =>
-          `flex gap-2 rounded-sm p-2 text-base ${isActive ? "bg-[#DB277711] text-[#DB2777]" : ""} ${className}`
+          `flex min-h-10 w-full min-w-max gap-2 rounded-sm p-2 text-base ${isActive ? "bg-[#DB277711] text-[#DB2777]" : ""} ${className}`
         }
       >
         {icon}
         {children}
       </NavLink>
-      {/* <a
-        href={to}
-        className={`flex w-full gap-2.5 rounded-sm p-2 text-base ${isActive ? "bg-[#DB277711] text-[#DB2777]" : ""} ${className}`}
-      >
-        {icon && (
-          <span className="flex h-6.5 w-6 items-center justify-center">
-            {icon}
-          </span>
-        )}
-        {children}
-      </a> */}
     </li>
   );
 };

@@ -1,5 +1,5 @@
 // SidebarLayout component manages the sidebar UI, including navigation links and user dropdown
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   CartIcon,
   HeartIcon,
@@ -12,29 +12,39 @@ import { SidebarItem } from "../../components/Sidebar/SidebarItem";
 import { SidebarList } from "./SidebarList";
 import { UserAdminSidebarBtn } from "../../components/Sidebar/UserAdminSidebarBtn";
 import { UserAdminDropdown } from "../../components/Sidebar/UserAdminDropdown";
+import ThemeSwitch from "../../components/general/ThemeSwitch";
 
 // Props for SidebarLayout, currently only controls expansion state
-interface SidebarItemProps {
-  expanded?: boolean;
-}
+// interface SidebarItemProps {
+//   expanded?: boolean;
+// }
 
 // Main SidebarLayout component
-export const SidebarLayout = ({ expanded = true }: SidebarItemProps) => {
+export const SidebarLayout = () => {
   // State to control user dropdown visibility
   const [userDropdownIsOpen, setUserDropdownIsOpen] = useState<boolean>(false);
+  const [expanded, setExpanded] = useState(false);
+  const expansionTimeout = useRef(0);
+
   // ! Placeholder user object; replace with global user/auth context in production
-  // const user: { name: string; email: string; type: "user" | "admin" } | null = {
-  //   name: "mm",
-  //   email: "mm",
-  //   type: "user",
-  // };
-  const user: { name: string; email: string; type: "user" | "admin" } | null =
-    null;
+  const _id = "null";
+
+  const handleMouseEnter = () => {
+    expansionTimeout.current = setTimeout(() => {
+      setExpanded(true);
+    }, 300);
+  };
+  const handleMouseLeave = () => {
+    clearTimeout(expansionTimeout.current);
+    setExpanded(false);
+  };
 
   return (
     // Sidebar container with dynamic width based on 'expanded' prop
     <div
-      className={`bg-sidebar-bg text-primaryFont relative flex h-full w-full flex-col items-start justify-between p-4`}
+      className={`bg-sidebar-bg text-primaryFont relative flex h-full flex-col items-start justify-between p-4 transition-[width] duration-300 ${expanded ? "w-[200px]" : "w-full"}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Main navigation links */}
       <SidebarList>
@@ -51,27 +61,30 @@ export const SidebarLayout = ({ expanded = true }: SidebarItemProps) => {
           {expanded ? "علاقه مندی ها" : ""}
         </SidebarItem>
       </SidebarList>
-      {/* Show login/signup if no user is present */}
-      {!user && (
-        <SidebarList className="max-h-min gap-y-4">
-          <SidebarItem to="/login" icon={<LoginIcon />}>
-            {expanded ? "ورود" : ""}
-          </SidebarItem>
-          <SidebarItem to="/signup" icon={<SignupIcon />}>
-            {expanded ? "ثبت‌نام" : ""}
-          </SidebarItem>
-        </SidebarList>
-      )}
-      {/* Show user dropdown if user is present */}
-      {user && (
-        <>
-          <UserAdminSidebarBtn
-            isOpen={userDropdownIsOpen}
-            onClick={() => setUserDropdownIsOpen((isOpen) => !isOpen)}
-          />
-          <UserAdminDropdown isOpen={userDropdownIsOpen} />
-        </>
-      )}
+      <div>
+        <ThemeSwitch />
+        {/* Show login/signup if no user is present */}
+        {!_id && (
+          <SidebarList className="max-h-min gap-y-4">
+            <SidebarItem to="/login" icon={<LoginIcon />}>
+              {expanded ? "ورود" : ""}
+            </SidebarItem>
+            <SidebarItem to="/signup" icon={<SignupIcon />}>
+              {expanded ? "ثبت‌نام" : ""}
+            </SidebarItem>
+          </SidebarList>
+        )}
+        {/* Show user dropdown if user is present */}
+        {_id && (
+          <div>
+            <UserAdminSidebarBtn
+              isOpen={userDropdownIsOpen}
+              onClick={() => setUserDropdownIsOpen((isOpen) => !isOpen)}
+            />
+            <UserAdminDropdown isOpen={userDropdownIsOpen} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
