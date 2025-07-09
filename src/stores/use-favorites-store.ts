@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-interface FavoritesState {
+interface FavoritesStateI {
   favorites: string[];
   toggleFavorites: (_id: string) => void;
 }
 
-export const useFavorites = create<FavoritesState>((set) => ({
+export const useFavorites = create<FavoritesStateI>((set) => ({
   favorites: JSON.parse(localStorage.getItem("favorites") || "[]"),
   toggleFavorites: (_id: string) =>
     set((state) => {

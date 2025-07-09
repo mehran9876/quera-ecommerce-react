@@ -1,15 +1,11 @@
-import { useState } from "react";
+// import { use, useState } from "react";
+import { useThemeStore } from "../../stores/use-theme-store";
 
 const ThemeSwitch = () => {
-  const [theme, setTheme] = useState(
-    document.documentElement.dataset.theme || "light",
-  );
+  const { theme, toggleTheme } = useThemeStore();
 
   const handleThemeChange = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    document.documentElement.dataset.theme = newTheme;
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    toggleTheme();
   };
 
   return (
@@ -18,13 +14,14 @@ const ThemeSwitch = () => {
       <input
         type="checkbox"
         className="theme-controller"
-        value="dark"
+        value={theme}
+        checked={theme === "dark"}
         onChange={handleThemeChange}
       />
 
       {/* sun icon */}
       <svg
-        className="swap-off fill-primaryPink h-6 w-6"
+        className={`swap-off fill-primaryPink h-6 w-6`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
@@ -33,7 +30,7 @@ const ThemeSwitch = () => {
 
       {/* moon icon */}
       <svg
-        className="swap-on h-6 w-6 fill-current"
+        className={`swap-on h-6 w-6 fill-current`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
