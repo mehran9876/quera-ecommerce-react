@@ -92,18 +92,21 @@ export const SidebarLayout = () => {
         )}
         {userId && !isAdmin && (
           <div>
-            <UserAdminSidebarBtn
+            <div>
+              <UserAdminSidebarBtn
+                isOpen={userDropdownIsOpen}
+                onClick={() => setUserDropdownIsOpen((isOpen) => !isOpen)}
+              >
+                کاربر
+              </UserAdminSidebarBtn>
+            </div>
+
+            <UserDropdown
+              onLogout={() => setUserDropdownIsOpen(false)}
               isOpen={userDropdownIsOpen}
-              onClick={() => setUserDropdownIsOpen((isOpen) => !isOpen)}
-            >
-              کاربر
-            </UserAdminSidebarBtn>
+            />
           </div>
         )}
-        <UserDropdown
-          onLogout={() => setUserDropdownIsOpen(false)}
-          isOpen={userDropdownIsOpen}
-        />
       </div>
     </div>
   );
