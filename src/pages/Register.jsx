@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginImage2 from "../assets/LoginImage2.png";
 import Input from "../components/general/Input";
 import Button from "../components/general/button";
 import { SidebarLayout } from "../layouts/Sidebar/SidebarLayout";
 import axios from "../utils/axios";
+import { useNavigate } from "react-router";
+import { useAuthStore } from "../stores/use-auth-store";
 
 export default function Register() {
+  const navigator = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +17,9 @@ export default function Register() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const { isAdmin, userId, setIsAdmin, setUserId } = useAuthStore();
+  console.log(userId);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,12 +36,15 @@ export default function Register() {
     try {
       setLoading(true);
       setError("");
-      const res = await axios.post("/api/users/register", {
+      const res = await axios.post("/api/users", {
         name,
         email,
         password,
       });
+      setUserId(res.data._id);
+      setIsAdmin(res.data.isAmin);
       console.log("✅ Register success:", res.data);
+      navigator("/");
     } catch (err) {
       setError(err.response?.data?.message || "ثبت‌نام ناموفق بود.");
       console.error("❌ Register error:", err);
@@ -43,19 +52,23 @@ export default function Register() {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    if (userId) {
+      navigator(-1);
+    }
+  }, [navigator]);
 
   return (
-    <div className="flex min-h-screen justify-between bg-primaryFont">
+    <div className="flex min-h-screen justify-between">
       <aside
         className={`fixed top-0 right-0 h-screen ${sidebarExpanded ? "w-1/5" : "w-18"}`}
       >
         <SidebarLayout expanded={sidebarExpanded} />
       </aside>
       <form onSubmit={handleSubmit} className="m-10 mr-25">
-        <h1 className="mb-6 text-2xl font-bold text-white">ثبت نام</h1>
-
-        {error && <p className="text-red-500 mb-4">{error}</p>} {/* ✅ Error Display */}
-
+        <h1 className="mb-6 text-2xl font-bold">ثبت نام</h1>
+        {error && <p className="mb-4 text-red-500">{error}</p>}{" "}
+        {/* ✅ Error Display */}
         <div className="mb-6">
           <Input
             id="name"
@@ -76,7 +89,6 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-
         <div className="mb-6">
           <Input
             className="w-md"
@@ -101,12 +113,11 @@ export default function Register() {
         </div>
         <Button
           type="submit"
-          className="bg-primaryPink mt-6 mb-6 w-16 cursor-pointer rounded-lg p-3"
+          className="bg-primaryPink mt-6 mb-6 w-16 cursor-pointer rounded-lg p-3 text-white"
           disabled={loading}
         >
           {loading ? "در حال ثبت‌نام..." : "ورود"}
         </Button>
-
         <div className="flex">
           <p>عضو هستید؟</p>
           <a href="./Login.jsx" className="text-primaryPink mr-2.5">

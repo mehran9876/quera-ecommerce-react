@@ -11,8 +11,10 @@ import {
 import { SidebarItem } from "../../components/Sidebar/SidebarItem";
 import { SidebarList } from "./SidebarList";
 import { UserAdminSidebarBtn } from "../../components/Sidebar/UserAdminSidebarBtn";
-import { UserAdminDropdown } from "../../components/Sidebar/UserAdminDropdown";
 import ThemeSwitch from "../../components/general/ThemeSwitch";
+import { useAuthStore } from "../../stores/use-auth-store";
+import { AdminDropdown } from "../../components/Sidebar/AdminDropDown";
+import { UserDropdown } from "../../components/Sidebar/UserDropdown";
 
 // Props for SidebarLayout, currently only controls expansion state
 // interface SidebarItemProps {
@@ -26,8 +28,7 @@ export const SidebarLayout = () => {
   const [expanded, setExpanded] = useState(false);
   const expansionTimeout = useRef(0);
 
-  // ! Placeholder user object; replace with global user/auth context in production
-  const _id = null;
+  const { isAdmin, userId } = useAuthStore();
 
   const handleMouseEnter = () => {
     expansionTimeout.current = setTimeout(() => {
@@ -64,7 +65,7 @@ export const SidebarLayout = () => {
       <div>
         <ThemeSwitch />
         {/* Show login/signup if no user is present */}
-        {!_id && (
+        {!userId && (
           <SidebarList className="max-h-min gap-y-4">
             <SidebarItem to="/login" icon={<LoginIcon />}>
               {expanded ? "ورود" : ""}
@@ -75,15 +76,34 @@ export const SidebarLayout = () => {
           </SidebarList>
         )}
         {/* Show user dropdown if user is present */}
-        {_id && (
+        {userId && isAdmin && (
           <div>
             <UserAdminSidebarBtn
               isOpen={userDropdownIsOpen}
               onClick={() => setUserDropdownIsOpen((isOpen) => !isOpen)}
+            >
+              ادمین
+            </UserAdminSidebarBtn>
+            <AdminDropdown
+              onLogout={() => setUserDropdownIsOpen(false)}
+              isOpen={userDropdownIsOpen}
             />
-            <UserAdminDropdown isOpen={userDropdownIsOpen} />
           </div>
         )}
+        {userId && !isAdmin && (
+          <div>
+            <UserAdminSidebarBtn
+              isOpen={userDropdownIsOpen}
+              onClick={() => setUserDropdownIsOpen((isOpen) => !isOpen)}
+            >
+              کاربر
+            </UserAdminSidebarBtn>
+          </div>
+        )}
+        <UserDropdown
+          onLogout={() => setUserDropdownIsOpen(false)}
+          isOpen={userDropdownIsOpen}
+        />
       </div>
     </div>
   );
