@@ -12,7 +12,7 @@ const UserProfilePage = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  const token = localStorage.getItem('token'); // فرض بر اینه که توکن اینجاست
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -42,7 +42,7 @@ const UserProfilePage = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -58,7 +58,7 @@ const UserProfilePage = () => {
         {
           name: form.name,
           email: form.email,
-          password: form.password || undefined, // فقط اگر وارد شده باشه
+          password: form.password || undefined,
         },
         {
           headers: { Authorization: `Bearer ${token}` },
