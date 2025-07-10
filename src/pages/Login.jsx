@@ -83,7 +83,7 @@ export default function Login() {
         </div>
         <Button
           type="submit"
-          className="bg-primaryPink mt-6 mb-6 w-16 cursor-pointer rounded-lg p-3 text-white"
+          className="bg-primaryPink mt-6 mb-6 w-16 min-w-max cursor-pointer rounded-lg p-3 text-white"
           disabled={loading}
         >
           {loading ? "در حال ورود..." : "ورود"}
