@@ -45,7 +45,7 @@ export default function Register() {
   };
 
   return (
-    <div className="flex min-h-screen justify-between bg-[#0f0f10]">
+    <div className="flex min-h-screen justify-between bg-primaryFont">
       <aside
         className={`fixed top-0 right-0 h-screen ${sidebarExpanded ? "w-1/5" : "w-18"}`}
       >

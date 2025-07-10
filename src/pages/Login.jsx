@@ -37,7 +37,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen justify-between bg-[#0f0f10]">
+    <div className="flex min-h-screen justify-between bg-primaryFont">
       <aside
         className={`fixed top-0 right-0 h-screen ${sidebarExpanded ? "w-1/5" : "w-18"}`}>
         <SidebarLayout expanded={sidebarExpanded} />
@@ -72,7 +72,7 @@ export default function Login() {
 
         <Button
           type="submit"
-          className="mt-6 mb-6 w-16 cursor-pointer rounded-lg bg-[#DB2777] p-3"
+          className="mt-6 mb-6 w-16 cursor-pointer rounded-lg bg-primaryPink p-3"
           disabled={loading}
         >
           {loading ? "در حال ورود..." : "ورود"}
@@ -80,7 +80,7 @@ export default function Login() {
 
         <div className="flex">
           <p>عضو نیستید؟</p>
-          <a href="#" className="mr-2.5 text-[#DB2777]">
+          <a href="#" className="mr-2.5 text-primaryPink">
             ثبت نام
           </a>
         </div>
