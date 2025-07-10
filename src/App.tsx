@@ -14,6 +14,7 @@ import UserShoppingProgressPage from "./pages/UserShoppingProgressPage";
 import UserProductReviews from "./components/product_page/UserProductReviews";
 import AdminOrders from "./pages/AdminOrders";
 import AdminOrderDetailed from "./pages/AdminOrderDetailed";
+import AdminAllProductsPage from "./pages/AdminAllProductsPage";
 import UserCheckoutPage from "./pages/UserCheckoutPage";
 import UserOrdersPage from "./pages/UserOrdersPage";
 import UserOrderDetailedPage from "./pages/UserOrderDetailedPage";
@@ -80,6 +81,7 @@ const router = createBrowserRouter([
             //   ),
             errorElement: <p>error</p>,
           },
+          { path: "products", Component: AdminAllProductsPage },
         ],
       },
       {
