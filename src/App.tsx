@@ -1,3 +1,4 @@
+
 import { Link } from "react-router";
 import ProductSlider from "./components/ProductSlider";
 import ProductLayoutCompact from "./components/general/ProductLayoutCompact";
@@ -19,7 +20,7 @@ const App = () => {
 
   if (isErrorNew || isErrorAll) return <p>error</p>;
   if (isLoadingNew || isLoadingAll) return <p>loading...</p>;
-  console.log(AllProducts?.products);
+
   return (
     <div className="flex flex-col justify-start p-6">
       <div className="mb-8 flex gap-20">
