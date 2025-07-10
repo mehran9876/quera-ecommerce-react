@@ -5,6 +5,7 @@ import AdminUsersPage from "../pages/AdminUsersPage";
 import AdminAllProductsPage from "../pages/AdminAllProductsPage";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import UserProfilePage from "../pages/UserProfilePage";
 import UserCartPage from "../pages/userCartPage";
 import UserCheckoutPage from "../pages/UserCheckoutPage";
 import UserOrderDetailedPage from "../pages/UserOrderDetailedPage";
@@ -55,6 +56,11 @@ const router = createBrowserRouter([
               ),
             errorElement: <p>error</p>,
           },
+          {
+            path: "profile",
+            Component: UserProfilePage
+          }
+      
         ],
       },
       {
