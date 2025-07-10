@@ -27,7 +27,7 @@ export const SidebarLayout = () => {
   const expansionTimeout = useRef(0);
 
   // ! Placeholder user object; replace with global user/auth context in production
-  const _id = "null";
+  const _id = null;
 
   const handleMouseEnter = () => {
     expansionTimeout.current = setTimeout(() => {

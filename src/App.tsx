@@ -51,10 +51,10 @@ const router = createBrowserRouter([
           {
             path: "orders/:orderID",
             Component: UserOrderDetailedPage,
-            // loader: async (param) =>
-            //   await axiosInstance(`/api/orders/${param}`).then(
-            //     (res) => res.data,
-            //   ),
+            loader: async ({ param }) =>
+              await axiosInstance(`/api/orders/${param.orderID}`).then(
+                (res) => res.data,
+              ),
             errorElement: <p>error</p>,
           },
         ],
@@ -74,10 +74,10 @@ const router = createBrowserRouter([
           {
             path: "orders/:orderID",
             Component: AdminOrderDetailed,
-            // loader: async (param) =>
-            //   await axiosInstance(`/api/orders/${param}`).then(
-            //     (res) => res.data,
-            //   ),
+            loader: async ({ params }) =>
+              await axiosInstance(`/api/orders/${params.orderID}`).then(
+                (res) => res.data,
+              ),
             errorElement: <p>error</p>,
           },
         ],

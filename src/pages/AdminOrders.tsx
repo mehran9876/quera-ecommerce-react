@@ -1,11 +1,11 @@
-// import { useGetAllOrdersAdmin } from "../hooks/useGetAllOrdersAdmin";
-
-import { orders } from "../assets/testData";
+// import { orders } from "../assets/testData";
 
 import OrdersTableData from "../components/orders/OrdersTableData";
+import { useGetAllOrdersAdmin } from "../hooks/useGetAllOrdersAdmin";
 
 export default function AdminOrders() {
-  // const { data: orders, isPending, isError } = useGetAllOrdersAdmin();
+  const { data: orders, isLoading, isError } = useGetAllOrdersAdmin();
+  console.log(orders);
 
   return (
     <div className="mx-22 my-30 **:text-center">
@@ -25,11 +25,15 @@ export default function AdminOrders() {
         </thead>
         <tbody>
           {/* row 1 */}
-          {orders.map((order) =>
-            order.orderItems.map((item) => (
-              <OrdersTableData order={order} key={item._id} item={item} />
-            )),
-          )}
+          {isLoading && <tr>loading...</tr>}
+          {isError && <tr>error</tr>}
+          {!isError &&
+            !isLoading &&
+            orders?.map((order) =>
+              order.orderItems.map((item) => (
+                <OrdersTableData order={order} key={item._id} item={item} />
+              )),
+            )}
         </tbody>
       </table>
     </div>

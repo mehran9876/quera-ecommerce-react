@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "../utils/axios";
+
 import type { OrderType } from "../types/ordersTypes";
 
-export const useGetAllOrdersMine = () => {
+import axiosInstance from "../utils/axios";
+
+export const useGetAllOrdersAdmin = () => {
   return useQuery<OrderType[]>({
-    queryKey: ["orders-mine"],
-    queryFn: () => axiosInstance.get(`api/orders/mine`).then((res) => res.data),
+    queryKey: ["orders-admin"],
+    queryFn: () => axiosInstance.get(`/api/orders`).then((res) => res.data),
     staleTime: 1000 * 60 * 15,
     gcTime: 1000 * 60 * 60,
   });
