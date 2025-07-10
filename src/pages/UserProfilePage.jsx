@@ -3,10 +3,10 @@ import axios from 'axios';
 
 const UserProfilePage = () => {
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -85,7 +85,9 @@ const UserProfilePage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* نام */}
           <div className="flex flex-col text-right">
-            <label htmlFor="name" className="mb-1 text-sm text-gray-600">نام</label>
+            <label htmlFor="name" className="mb-1 text-sm text-gray-600">
+              نام
+            </label>
             <input
               type="text"
               name="name"
@@ -98,7 +100,9 @@ const UserProfilePage = () => {
 
           {/* ایمیل */}
           <div className="flex flex-col text-right">
-            <label htmlFor="email" className="mb-1 text-sm text-gray-600">ایمیل</label>
+            <label htmlFor="email" className="mb-1 text-sm text-gray-600">
+              ایمیل
+            </label>
             <input
               type="email"
               name="email"
@@ -111,7 +115,9 @@ const UserProfilePage = () => {
 
           {/* رمز */}
           <div className="flex flex-col text-right">
-            <label htmlFor="password" className="mb-1 text-sm text-gray-600">رمزعبور</label>
+            <label htmlFor="password" className="mb-1 text-sm text-gray-600">
+              رمزعبور
+            </label>
             <input
               type="password"
               name="password"
@@ -124,7 +130,12 @@ const UserProfilePage = () => {
 
           {/* تکرار رمز */}
           <div className="flex flex-col text-right">
-            <label htmlFor="confirmPassword" className="mb-1 text-sm text-gray-600">تکرار رمزعبور</label>
+            <label
+              htmlFor="confirmPassword"
+              className="mb-1 text-sm text-gray-600"
+            >
+              تکرار رمزعبور
+            </label>
             <input
               type="password"
               name="confirmPassword"
@@ -145,7 +156,7 @@ const UserProfilePage = () => {
             </button>
             <button
               type="button"
-              className="bg-pink-600 text-white px-6 py-2 rounded hover:bg-pink-700 transition"
+              className="rounded bg-pink-600 px-6 py-2 text-white transition hover:bg-pink-700"
             >
               سفارشات من
             </button>

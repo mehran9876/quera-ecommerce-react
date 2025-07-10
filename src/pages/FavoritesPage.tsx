@@ -1,4 +1,4 @@
-import { useFavorites } from "../stores/use-favorites-store"; 
+import { useFavorites } from "../stores/use-favorites-store";
 import { useGetProduct } from "../hooks/useGetProduct";
 import ProductLayoutCompact from "../components/general/ProductLayoutCompact";
 
@@ -14,30 +14,24 @@ const FavoritesPage = () => {
   }
 
   return (
-    <div className="p-6 flex flex-col gap-6">
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {favorites.map((id) => {
-          const { data, isLoading, isError } = useGetProduct(id);
-
-          if (isLoading) return <div key={id}>در حال بارگذاری...</div>;
-          if (isError) return <div key={id}>خطا در دریافت محصول</div>;
-          if (!data) return null;
-
-          return (
-            <ProductLayoutCompact
-              key={data._id}
-              productName={data.productName}
-              size={data.size}
-              image={data.image}
-              price={data.price}
-              _id={data._id}
-            />
-          );
-        })}
+    <div className="flex flex-col gap-6 p-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        {favorites.map((id) => (
+          <FavoriteItem key={id} id={id} />
+        ))}
       </div>
     </div>
   );
+};
+
+const FavoriteItem = ({ id }: { id: string }) => {
+  const { data, isLoading, isError } = useGetProduct(id);
+
+  if (isLoading) return <div key={id}>در حال بارگذاری...</div>;
+  if (isError) return <div key={id}>خطا در دریافت محصول</div>;
+  if (!data) return <div>خالی</div>;
+
+  return <ProductLayoutCompact product={data} size={"small"} />;
 };
 
 export default FavoritesPage;
