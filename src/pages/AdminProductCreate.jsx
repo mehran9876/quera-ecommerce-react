@@ -75,12 +75,12 @@ export default function AdminProductCreate() {
   };
 
   return (
-    <div className="min-h-screen p-6 text-white">
+    <div className="min-h-screen p-6">
       <div className="mx-auto max-w-4xl">
         <h2 className="mb-6 text-right text-2xl font-bold">محصول جدید</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="rounded-lg border border-dashed border-[#3F4043] bg-[#141516] p-6 text-center">
+          <div className="rounded-lg border border-dashed border-[#3F4043] bg-white p-6 text-center text-black dark:bg-[#141516] dark:text-white">
             <input
               type="file"
               onChange={handleImageChange}
@@ -95,7 +95,7 @@ export default function AdminProductCreate() {
               onChange={(e) => setName(e.target.value)}
               type="text"
               placeholder="نام محصول را وارد نمایید"
-              className="w-full rounded-lg border border-[#3F4043] bg-[#141516] p-2 text-right text-sm text-[#9CA3AF]"
+              className="text-placeholder w-full rounded-lg border border-[#3F4043] bg-white p-2 text-right text-sm dark:bg-[#141516]"
             />
           </div>
 
@@ -107,7 +107,7 @@ export default function AdminProductCreate() {
                 onChange={(e) => setPrice(e.target.value)}
                 type="text"
                 placeholder="قیمت محصول را وارد نمایید"
-                className="w-full rounded-lg border border-[#3F4043] bg-[#141516] p-2 text-right text-sm text-[#9CA3AF]"
+                className="text-placeholder w-full rounded-lg border border-[#3F4043] bg-white p-2 text-right text-sm dark:bg-[#141516]"
               />
             </div>
             <div>
@@ -117,7 +117,7 @@ export default function AdminProductCreate() {
                 onChange={(e) => setBrand(e.target.value)}
                 type="text"
                 placeholder="برند محصول را وارد نمایید"
-                className="w-full rounded-lg border border-[#3F4043] bg-[#141516] p-2 text-right text-sm text-[#9CA3AF]"
+                className="text-placeholder w-full rounded-lg border border-[#3F4043] bg-white p-2 text-right text-sm dark:bg-[#141516]"
               />
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function AdminProductCreate() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="توضیحات محصول را وارد نمایید"
-              className="w-full rounded-lg border border-[#3F4043] bg-[#141516] p-3 text-right text-sm text-[#9CA3AF]"
+              className="text-placeholder w-full rounded-lg border border-[#3F4043] bg-white p-3 text-right text-sm dark:bg-[#141516]"
               rows={4}
             />
           </div>
@@ -141,7 +141,7 @@ export default function AdminProductCreate() {
                 onChange={(e) => setQuantity(e.target.value)}
                 type="number"
                 placeholder="تعداد قابل خرید را وارد نمایید"
-                className="w-full rounded-lg border border-[#3F4043] bg-[#141516] p-2 text-right text-[#9CA3AF]"
+                className="text-placeholder w-full rounded-lg border border-[#3F4043] bg-white p-2 text-right dark:bg-[#141516]"
               />
             </div>
             <div>
@@ -149,7 +149,7 @@ export default function AdminProductCreate() {
               <select
                 value={stock}
                 onChange={(e) => setStock(e.target.value)}
-                className="w-full rounded-lg border border-[#3F4043] bg-[#141516] p-2 text-right text-[#9CA3AF]"
+                className="text-placeholder w-full rounded-lg border border-[#3F4043] bg-white p-2 text-right dark:bg-[#141516]"
               >
                 <option value="">وضعیت موجودی را انتخاب کنید</option>
                 <option value="موجود">موجود</option>
@@ -160,7 +160,7 @@ export default function AdminProductCreate() {
 
           <Button
             type="submit"
-            className="mt-6 cursor-pointer rounded-lg bg-[#DB2777] p-3 text-sm"
+            className="mt-6 cursor-pointer rounded-lg bg-[#DB2777] p-3 text-sm text-white"
           >
             {mutation.isPending ? "در حال ارسال..." : "ساخت محصول جدید"}
           </Button>

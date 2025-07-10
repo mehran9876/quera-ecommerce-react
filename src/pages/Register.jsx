@@ -37,9 +37,10 @@ export default function Register() {
       setLoading(true);
       setError("");
       const res = await axios.post("/api/users", {
-        name,
+        username: name,
         email,
         password,
+        confirm_Password: repeatPassword,
       });
       setUserId(res.data._id);
       setIsAdmin(res.data.isAmin);
