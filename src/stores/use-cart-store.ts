@@ -7,7 +7,9 @@ function getCartFromStorage(): CartItem[] {
     return Array.isArray(data) &&
       data.every(
         (item) =>
-          typeof item._id === "string" && typeof item.quantity === "number",
+          typeof item._id === "string" &&
+          typeof item.name === "string" &&
+          typeof item.quantity === "number",
       )
       ? data
       : [];
@@ -23,7 +25,7 @@ function setCartToStorage(cart: CartItem[]) {
 export const useCartStore = create<CartStateI>((set) => ({
   cart: getCartFromStorage(),
 
-  addToCart: (productId: string, quantity: number = 1) =>
+  addToCart: (productId: string, name: string, quantity: number = 1) =>
     set(({ cart }) => {
       let newCart;
       if (cart.find((item) => item._id === productId)) {
@@ -31,7 +33,7 @@ export const useCartStore = create<CartStateI>((set) => ({
           item._id === productId ? { ...item, quantity: quantity } : item,
         );
       } else {
-        newCart = [...cart, { _id: productId, quantity }];
+        newCart = [...cart, { _id: productId, name, quantity }];
       }
       setCartToStorage(newCart);
       return { cart: newCart };

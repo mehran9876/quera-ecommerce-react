@@ -42,7 +42,7 @@ const UserShoppingProgressPage = () => {
         </StepButton>
         <StepLine active={step >= 3} />
         <StepButton
-          disabled={!_id}
+          disabled={!_id || !address || !city || !country || !postalCode}
           onClick={() => setStep(3)}
           active={step >= 3}
         >

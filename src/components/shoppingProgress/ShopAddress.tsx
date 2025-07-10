@@ -99,7 +99,12 @@ const ShopAddress = ({
             <label htmlFor="saman">درگاه پرداخت سامان</label>
           </div>
         </div>
-        <Button type="submit">ادامه</Button>
+        <Button
+          disabled={!address || !city || !country || !postalCode}
+          type="submit"
+        >
+          ادامه
+        </Button>
       </form>
     </div>
   );

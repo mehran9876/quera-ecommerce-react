@@ -118,7 +118,9 @@ const UserProductPage = () => {
           <div className="w-max cursor-pointer justify-self-end">
             <Button
               disabled={productObj.countInStock === 0}
-              onClick={() => addToCart(productObj._id, quantity)}
+              onClick={() =>
+                addToCart(productObj._id, productObj.name, quantity)
+              }
             >
               افزودن به سبد
             </Button>
