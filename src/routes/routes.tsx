@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { PageLayout } from "../layouts/PageLayout";
 import AdminOrderDetailed from "../pages/AdminOrderDetailed";
 import AdminUsersPage from "../pages/AdminUsersPage";
+import AdminAllProductsPage from "../pages/AdminAllProductsPage";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import UserCartPage from "../pages/userCartPage";
@@ -78,6 +79,7 @@ const router = createBrowserRouter([
               ),
             errorElement: <p>error</p>,
           },
+          { path: "products", Component: AdminAllProductsPage },
         ],
       },
       {
