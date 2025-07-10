@@ -1,118 +1,79 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { PageLayout } from "./layouts/PageLayout";
-import UserProductPage from "./pages/UserProductPage";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import UserCartPage from "./pages/userCartPage";
-import AdminUsersPage from "./pages/AdminUsersPage";
-import axiosInstance from "./utils/axios";
-import UserShopPage from "./pages/userShopPage";
-import AddReviewComponent from "./components/product_page/AddReviewComponent";
-import UserHomePage from "./pages/UserHomePage";
-import UserShoppingProgressPage from "./pages/UserShoppingProgressPage";
-import UserProductReviews from "./components/product_page/UserProductReviews";
-import AdminOrders from "./pages/AdminOrders";
-import AdminOrderDetailed from "./pages/AdminOrderDetailed";
-import AdminAllProductsPage from "./pages/AdminAllProductsPage";
-import UserCheckoutPage from "./pages/UserCheckoutPage";
-import UserOrdersPage from "./pages/UserOrdersPage";
-import UserOrderDetailedPage from "./pages/UserOrderDetailedPage";
 
-// react query
-// 1. Create a client
-const queryClient = new QueryClient();
+import { Link } from "react-router";
+import ProductSlider from "./components/ProductSlider";
+import ProductLayoutCompact from "./components/general/ProductLayoutCompact";
+import Button from "./components/general/button";
+import { useGetAllProductsPag } from "./hooks/getAllProductsPagination";
+import { useGetNewProducts } from "./hooks/useGetNewProducts";
 
-// react router
-const router = createBrowserRouter([
-  {
-    Component: PageLayout,
-    children: [
-      { index: true, Component: UserHomePage },
-      { path: "login", Component: Login },
-      { path: "signup", Component: Register },
-      {
-        path: "products",
-        Component: UserShopPage,
-      },
-      {
-        path: "user",
-        children: [
-          { path: "cart", Component: UserCartPage },
-          { path: "favorites", element: <h1>Favorites page</h1> },
-          {
-            path: "progress",
-            Component: UserShoppingProgressPage,
-          },
-          {
-            path: "checkout",
-            Component: UserCheckoutPage,
-          },
-          { path: "orders", Component: UserOrdersPage },
-          {
-            path: "orders/:orderID",
-            Component: UserOrderDetailedPage,
-            // loader: async (param) =>
-            //   await axiosInstance(`/api/orders/${param}`).then(
-            //     (res) => res.data,
-            //   ),
-            errorElement: <p>error</p>,
-          },
-        ],
-      },
-      {
-        path: "admin",
-        children: [
-          { path: "dashboard", element: <h1>Dashboard</h1> },
-          {
-            path: "users",
-            Component: AdminUsersPage,
-            errorElement: <p>error</p>,
-            loader: async () =>
-              await axiosInstance(`/api/users`).then((res) => res.data),
-          },
-          { path: "orders", Component: AdminOrders },
-          {
-            path: "orders/:orderID",
-            Component: AdminOrderDetailed,
-            // loader: async (param) =>
-            //   await axiosInstance(`/api/orders/${param}`).then(
-            //     (res) => res.data,
-            //   ),
-            errorElement: <p>error</p>,
-          },
-          { path: "products", Component: AdminAllProductsPage },
-        ],
-      },
-      {
-        path: "product/:productId",
-        Component: UserProductPage,
-        errorElement: <p>error</p>,
-        loader: async ({ params }) =>
-          await axiosInstance(`/api/products/${params.productId}`).then(
-            (res) => res.data,
-          ),
-        children: [
-          { index: true, Component: AddReviewComponent },
-          { path: "comments", Component: UserProductReviews },
-          { path: "related", element: <h1>related</h1> },
-        ],
-      },
-      {
-        path: "*",
-        element: <h1>404</h1>,
-      },
-    ],
-  },
-]);
-function App() {
+const App = () => {
+  const {
+    data: newProducts,
+    isError: isErrorNew,
+    isLoading: isLoadingNew,
+  } = useGetNewProducts();
+  const {
+    data: AllProducts,
+    isError: isErrorAll,
+    isLoading: isLoadingAll,
+  } = useGetAllProductsPag();
+
+  if (isErrorNew || isErrorAll) return <p>error</p>;
+  if (isLoadingNew || isLoadingAll) return <p>loading...</p>;
+
   return (
-    // 2. Provide the client to your app
-    <QueryClientProvider client={queryClient}>
-      {/* using router */}
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <div className="flex flex-col justify-start p-6">
+      <div className="mb-8 flex gap-20">
+        <div className="relative grid grid-cols-2 gap-4">
+          {AllProducts?.products.slice(0, 4).map((product) => (
+            <div key={product._id} className="relative">
+              <ProductLayoutCompact
+                productName={product.name}
+                size="small"
+                product={product}
+              />
+            </div>
+          ))}
+        </div>
+        <ProductSlider products={newProducts} />
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center justify-between px-0">
+          <h2 className="text-xl">محصولات ویژه</h2>
+          <div className="cursor-pointer">
+            <Link to="products">
+              <Button>فروشگاه</Button>
+            </Link>
+          </div>
+        </div>
+        <div className="grid grid-cols-4 gap-14">
+          {AllProducts?.products.slice(4, 8).map((product) => (
+            <div key={product._id} className="relative">
+              <ProductLayoutCompact
+                productName={product.name}
+                size="small"
+                product={product}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-4 gap-14">
+          <div className="col-span-1" />
+          {AllProducts?.products.slice(8).map((product) => (
+            <div key={product._id} className="relative">
+              <ProductLayoutCompact
+                productName={product.name}
+                size="small"
+                product={product}
+              />
+            </div>
+          ))}
+          <div className="col-span-1" />
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default App;

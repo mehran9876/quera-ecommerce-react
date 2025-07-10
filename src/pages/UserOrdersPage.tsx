@@ -1,11 +1,9 @@
-// import { useGetAllOrdersAdmin } from "../hooks/useGetAllOrdersAdmin";
-
-import { orders } from "../assets/testData";
-
+// import { orders } from "../assets/testData";
 import OrdersTableData from "../components/orders/OrdersTableData";
+import { useGetAllOrdersMine } from "../hooks/useGetAllOrdersMine";
 
 export default function UserOrdersPage() {
-  // const { data: orders, isPending, isError } = useGetAllOrdersMine();
+  const { data: orders, isLoading, isError, error } = useGetAllOrdersMine();
 
   return (
     <div className="mx-22 my-30 **:text-center">
@@ -25,7 +23,9 @@ export default function UserOrdersPage() {
         </thead>
         <tbody>
           {/* row 1 */}
-          {orders.map((order) =>
+          {isLoading && <tr>loading...</tr>}
+          {isError && <tr>{error.message}</tr>}
+          {orders?.map((order) =>
             order.orderItems.map((item) => (
               <OrdersTableData order={order} key={item._id} item={item} />
             )),
