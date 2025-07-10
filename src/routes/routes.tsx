@@ -17,12 +17,14 @@ import UserProductPage from "../pages/UserProductPage";
 import AddReviewComponent from "../components/product_page/AddReviewComponent";
 import UserProductReviews from "../components/product_page/UserProductReviews";
 import AdminOrders from "../pages/AdminOrders";
-import UserProfilePage from "../pages/UserProfilePage";
+
 import App from "../App";
 import Admin from "../layouts/Admin";
 import User from "../layouts/User";
 import UserProductRelated from "../components/product_page/UserProductRelated";
 import FavoritesPage from "../pages/FavoritesPage";
+import AdminDashboardPage from "../pages/adminDashboardPage";
+import AdminProductCreate from "../pages/AdminProductCreate";
 
 const router = createBrowserRouter([
   {
@@ -61,15 +63,15 @@ const router = createBrowserRouter([
           },
           {
             path: "profile",
-            Component: UserProfilePage
-          }
+            Component: UserProfilePage,
+          },
         ],
       },
       {
         path: "admin",
         Component: Admin,
         children: [
-          { path: "dashboard", element: <h1>Dashboard</h1> },
+          { path: "dashboard", Component: AdminDashboardPage },
           {
             path: "users",
             Component: AdminUsersPage,
@@ -88,6 +90,7 @@ const router = createBrowserRouter([
             errorElement: <p>error</p>,
           },
           { path: "products", Component: AdminAllProductsPage },
+          { path: "new-product", Component: AdminProductCreate },
         ],
       },
       {

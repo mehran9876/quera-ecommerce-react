@@ -7,7 +7,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const AdminDashboardPage = (salesData, customers) => {
+const AdminDashboardPage = (salesData) => {
   const totalSale = 0;
   const customers = 10;
   const totalSoldItems = 100;
@@ -16,13 +16,13 @@ const AdminDashboardPage = (salesData, customers) => {
     <div>
       <div
         id="dataContainer"
-        className="flex justify-around items-center gap-20 mx-auto w-7/10"
+        className="mx-auto flex w-7/10 items-center justify-around gap-20"
       >
         <div
           id="totalSales"
-          className="flex flex-col justify-evenly items-start bg-sidebar-bg pr-3 rounded-lg w-[320px] h-[160px]"
+          className="bg-sidebar-bg flex h-[160px] w-[320px] flex-col items-start justify-evenly rounded-lg pr-3"
         >
-          <p className="bg-primaryPink px-4 py-2 rounded-full font-bold text-base">
+          <p className="bg-primaryPink rounded-full px-4 py-2 text-base font-bold">
             $
           </p>
           <div className="flex flex-col gap-1">
@@ -35,9 +35,9 @@ const AdminDashboardPage = (salesData, customers) => {
         </div>
         <div
           id="customers"
-          className="flex flex-col justify-evenly items-start bg-sidebar-bg pr-3 rounded-lg w-[320px] h-[160px]"
+          className="bg-sidebar-bg flex h-[160px] w-[320px] flex-col items-start justify-evenly rounded-lg pr-3"
         >
-          <p className="bg-primaryPink px-4 py-2 rounded-full font-bold text-base">
+          <p className="bg-primaryPink rounded-full px-4 py-2 text-base font-bold">
             $
           </p>
           <div className="flex flex-col gap-1">
@@ -47,9 +47,9 @@ const AdminDashboardPage = (salesData, customers) => {
         </div>
         <div
           id="totalSales"
-          className="flex flex-col justify-evenly items-start bg-sidebar-bg pr-3 rounded-lg w-[320px] h-[160px]"
+          className="bg-sidebar-bg flex h-[160px] w-[320px] flex-col items-start justify-evenly rounded-lg pr-3"
         >
-          <p className="bg-primaryPink px-4 py-2 rounded-full font-bold text-base">
+          <p className="bg-primaryPink rounded-full px-4 py-2 text-base font-bold">
             $
           </p>
           <div className="flex flex-col gap-1">
@@ -58,9 +58,9 @@ const AdminDashboardPage = (salesData, customers) => {
           </div>
         </div>
       </div>
-      <div className="m-auto p-8 w-9/10">
-        <div className="flex justify-start mb-2">
-          <span className="font-bold text-placeholder text-sm">
+      <div className="m-auto w-9/10 p-8">
+        <div className="mb-2 flex justify-start">
+          <span className="text-placeholder text-sm font-bold">
             نمودار فروش
           </span>
         </div>
