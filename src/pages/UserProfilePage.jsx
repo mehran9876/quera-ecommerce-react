@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const Profile = () => {
+const UserProfilePage = () => {
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -8,25 +9,79 @@ const Profile = () => {
     confirmPassword: '',
   });
 
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const token = localStorage.getItem('token'); // فرض بر اینه که توکن اینجاست
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        setLoading(true);
+        const { data } = await axios.get('/api/users/profile', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setForm((prev) => ({
+          ...prev,
+          name: data.name,
+          email: data.email,
+        }));
+      } catch (error) {
+        console.error(error);
+        setMessage('خطا در دریافت اطلاعات کاربر');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (form.password !== form.confirmPassword) {
-      alert('رمز عبور و تکرار آن یکسان نیستند!');
+      setMessage('رمز عبور و تکرار آن یکسان نیستند');
       return;
     }
 
-    console.log('فرم ارسال شد:', form);
+    try {
+      setLoading(true);
+      await axios.put(
+        '/api/users/profile',
+        {
+          name: form.name,
+          email: form.email,
+          password: form.password || undefined, // فقط اگر وارد شده باشه
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setMessage('پروفایل با موفقیت بروزرسانی شد');
+    } catch (error) {
+      console.error(error);
+      setMessage('خطا در بروزرسانی پروفایل');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center px-4 py-12">
       <div className="bg-white shadow-md rounded-lg w-full max-w-xl p-8">
         <h2 className="text-center text-xl font-bold mb-6 text-gray-800">بروزرسانی پروفایل</h2>
+
+        {message && (
+          <p className="text-center mb-4 text-sm text-red-500">{message}</p>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* نام */}
           <div className="flex flex-col text-right">
@@ -34,11 +89,10 @@ const Profile = () => {
             <input
               type="text"
               name="name"
-              id="name"
               value={form.name}
               onChange={handleChange}
               placeholder="نام خود را وارد نمایید"
-              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="border border-gray-300 rounded px-4 py-2"
             />
           </div>
 
@@ -48,49 +102,46 @@ const Profile = () => {
             <input
               type="email"
               name="email"
-              id="email"
               value={form.email}
               onChange={handleChange}
               placeholder="ایمیل خود را وارد نمایید"
-              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="border border-gray-300 rounded px-4 py-2"
             />
           </div>
 
-          {/* رمز عبور */}
+          {/* رمز */}
           <div className="flex flex-col text-right">
             <label htmlFor="password" className="mb-1 text-sm text-gray-600">رمزعبور</label>
             <input
               type="password"
               name="password"
-              id="password"
               value={form.password}
               onChange={handleChange}
-              placeholder="رمزعبور خود را وارد نمایید"
-              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              placeholder="رمزعبور جدید (اختیاری)"
+              className="border border-gray-300 rounded px-4 py-2"
             />
           </div>
 
-          {/* تکرار رمزعبور */}
+          {/* تکرار رمز */}
           <div className="flex flex-col text-right">
             <label htmlFor="confirmPassword" className="mb-1 text-sm text-gray-600">تکرار رمزعبور</label>
             <input
               type="password"
               name="confirmPassword"
-              id="confirmPassword"
               value={form.confirmPassword}
               onChange={handleChange}
-              placeholder="تکرار رمزعبور خود را وارد نمایید"
-              className="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              placeholder="تکرار رمزعبور"
+              className="border border-gray-300 rounded px-4 py-2"
             />
           </div>
 
-          {/* دکمه‌ها */}
           <div className="flex justify-between pt-4">
             <button
               type="submit"
-              className="bg-pink-600 text-white px-6 py-2 rounded hover:bg-pink-700 transition"
+              className="bg-pink-600 text-white px-6 py-2 rounded hover:bg-pink-700 transition disabled:opacity-50"
+              disabled={loading}
             >
-              بروزرسانی
+              {loading ? 'در حال ارسال...' : 'بروزرسانی'}
             </button>
             <button
               type="button"
@@ -105,4 +156,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProfilePage;
