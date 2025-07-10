@@ -1,3 +1,17 @@
+export type NewOrderType = {
+  shippingAddress: {
+    address: string;
+    city: string;
+    postalCode: string;
+  };
+  paymentMethod: string;
+  orderItems: {
+    _id: string;
+    name: string;
+    qty: number;
+  }[];
+};
+
 export type OrderItemType = {
   _id: string;
   name: string;

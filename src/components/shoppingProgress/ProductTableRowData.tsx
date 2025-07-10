@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useGetProduct } from "../../hooks/useGetProduct";
 import { useCartStore } from "../../stores/use-cart-store";
 import Input from "../general/Input";
 import type { AxiosError } from "axios";
+import persianNumberFormatter from "../../utils/persianNumberFormatter";
 
 interface ProductTableDataProps {
   product: { _id: string; quantity: number };
@@ -13,17 +14,17 @@ const ProductTableData = ({
   product,
   handleTotalPrice,
 }: ProductTableDataProps) => {
-  const {
-    data: productObj,
-    isLoading,
-    isError,
-    error,
-  } = useGetProduct(product._id);
-
+  // prettier-ignore
+  const {data: productObj, isLoading, isError, error, } = useGetProduct(product._id);
   const { changeQuantity: handleQuantityChange, removeFromCart } =
     useCartStore();
+  const hasRun = useRef(false);
+
   useEffect(() => {
-    if (productObj) handleTotalPrice(productObj.price * product.quantity);
+    if (productObj && !hasRun.current) {
+      handleTotalPrice(productObj.price * product.quantity);
+      hasRun.current = true;
+    }
   }, [productObj, handleTotalPrice, product.quantity]);
 
   useEffect(() => {
@@ -62,10 +63,11 @@ const ProductTableData = ({
           value={product.quantity}
           onChange={(e) => handleQuantityChange(product._id, +e.target.value)}
           max={productObj?.quantity}
+          min={1}
         />
       </td>
-      <td>{productObj?.price}</td>
-      <td>{product.quantity * productObj?.price}</td>
+      <td>{persianNumberFormatter(productObj?.price)}</td>
+      <td>{persianNumberFormatter(productObj?.price * product.quantity)}</td>
     </tr>
   );
 };

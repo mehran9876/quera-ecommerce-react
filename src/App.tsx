@@ -14,6 +14,9 @@ import UserShoppingProgressPage from "./pages/UserShoppingProgressPage";
 import UserProductReviews from "./components/product_page/UserProductReviews";
 import AdminOrders from "./pages/AdminOrders";
 import AdminOrderDetailed from "./pages/AdminOrderDetailed";
+import UserCheckoutPage from "./pages/UserCheckoutPage";
+import UserOrdersPage from "./pages/UserOrdersPage";
+import UserOrderDetailedPage from "./pages/UserOrderDetailedPage";
 
 // react query
 // 1. Create a client
@@ -22,23 +25,37 @@ const queryClient = new QueryClient();
 // react router
 const router = createBrowserRouter([
   {
-    element: <PageLayout />,
+    Component: PageLayout,
     children: [
-      { index: true, element: <UserHomePage /> },
-      { path: "login", element: <Login /> },
-      { path: "signup", element: <Register /> },
+      { index: true, Component: UserHomePage },
+      { path: "login", Component: Login },
+      { path: "signup", Component: Register },
       {
         path: "products",
-        element: <UserShopPage />,
+        Component: UserShopPage,
       },
       {
         path: "user",
         children: [
-          { path: "cart", element: <UserCartPage /> },
+          { path: "cart", Component: UserCartPage },
           { path: "favorites", element: <h1>Favorites page</h1> },
           {
-            path: "payout",
+            path: "progress",
             Component: UserShoppingProgressPage,
+          },
+          {
+            path: "checkout",
+            Component: UserCheckoutPage,
+          },
+          { path: "orders", Component: UserOrdersPage },
+          {
+            path: "orders/:orderID",
+            Component: UserOrderDetailedPage,
+            // loader: async (param) =>
+            //   await axiosInstance(`/api/orders/${param}`).then(
+            //     (res) => res.data,
+            //   ),
+            errorElement: <p>error</p>,
           },
         ],
       },
@@ -48,7 +65,7 @@ const router = createBrowserRouter([
           { path: "dashboard", element: <h1>Dashboard</h1> },
           {
             path: "users",
-            element: <AdminUsersPage />,
+            Component: AdminUsersPage,
             errorElement: <p>error</p>,
             loader: async () =>
               await axiosInstance(`/api/users`).then((res) => res.data),
@@ -67,15 +84,15 @@ const router = createBrowserRouter([
       },
       {
         path: "product/:productId",
-        element: <UserProductPage />,
+        Component: UserProductPage,
         errorElement: <p>error</p>,
         loader: async ({ params }) =>
           await axiosInstance(`/api/products/${params.productId}`).then(
             (res) => res.data,
           ),
         children: [
-          { index: true, element: <AddReviewComponent /> },
-          { path: "comments", element: <UserProductReviews /> },
+          { index: true, Component: AddReviewComponent },
+          { path: "comments", Component: UserProductReviews },
           { path: "related", element: <h1>related</h1> },
         ],
       },

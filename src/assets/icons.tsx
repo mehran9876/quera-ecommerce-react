@@ -438,7 +438,7 @@ export const Favorite = ({ isFavorite }: { isFavorite: boolean }) => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={`size-6 ${isFavorite ? "fill-red-600 stroke-red-600" : "fill-none stroke-current"}`}
+    className={`size-6 ${isFavorite ? "fill-red-600 stroke-red-600" : "fill-none stroke-black"}`}
   >
     <path
       strokeLinecap="round"

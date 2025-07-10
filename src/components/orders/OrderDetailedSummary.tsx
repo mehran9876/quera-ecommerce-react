@@ -1,8 +1,25 @@
+import { Link } from "react-router";
 import type { OrderType } from "../../types/ordersTypes";
 import persianNumberFormatter from "../../utils/persianNumberFormatter";
 import Button from "../general/button";
 
-const OrderDetailedSummary = ({ order }: { order: OrderType }) => {
+interface OrderDetailedSummaryProps<linkStateType = unknown> {
+  order: OrderType;
+  buttonText?: string;
+  button?: boolean;
+  onClick?: () => void;
+  to?: string;
+  linkState?: linkStateType;
+}
+
+const OrderDetailedSummary = ({
+  order,
+  button = false,
+  buttonText = "",
+  onClick = () => {},
+  to = "",
+  linkState = {},
+}: OrderDetailedSummaryProps) => {
   return (
     <div className="flex flex-col">
       <h4 className="mb-6 text-xl">آدرس دریافت</h4>
@@ -71,7 +88,17 @@ const OrderDetailedSummary = ({ order }: { order: OrderType }) => {
         </p>
       </div>
 
-      <Button>ارسال شد</Button>
+      {button && (
+        <Button onclick={onClick}>
+          {to ? (
+            <Link to={to} state={linkState}>
+              {buttonText}
+            </Link>
+          ) : (
+            buttonText
+          )}
+        </Button>
+      )}
     </div>
   );
 };

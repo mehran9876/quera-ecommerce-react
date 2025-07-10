@@ -18,15 +18,15 @@ const ProductLayoutFull = ({ product }: ProductLayoutFullProps) => {
   } = useGetCategory(product.category);
   const { addToCart } = useCartStore();
   const handleAddToCart = () => {
-    addToCart(product._id);
+    addToCart(product._id, product.name);
   };
 
   return (
     <figure className="bg-bgCard max-w-96 overflow-hidden rounded-lg">
-      <div className="relative h-42.5 overflow-hidden">
+      <div className="relative h-42.5 overflow-hidden bg-white">
         <Link to={`/product/${product._id}`}>
           <img
-            className="object-cover"
+            className="mx-auto h-full object-contain"
             src={product.image}
             alt={product.name}
           />

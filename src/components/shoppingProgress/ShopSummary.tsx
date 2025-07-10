@@ -1,7 +1,9 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { CartItem } from "../../types/cartTypes";
 import Button from "../general/button";
 import ProductTableData from "./ProductTableRowData";
+import persianNumberFormatter from "../../utils/persianNumberFormatter";
+import { useCreateOrder } from "../../hooks/useCreateOrder";
 
 interface ShopSummaryProps {
   cart: CartItem[];
@@ -22,6 +24,28 @@ const ShopSummary = ({
   const handleTotalPrice = useCallback((priceSum: number) => {
     setTotalPrice((curSum: number) => curSum + priceSum);
   }, []);
+  const { mutate, isPending, isError, isSuccess } = useCreateOrder();
+
+  const handleAddOrder = () => {
+    const payload = {
+      orderItems: cart.map((item) => ({
+        _id: item._id,
+        name: item.name,
+        qty: item.quantity,
+      })),
+      paymentMethod,
+      shippingAddress,
+    };
+    mutate(payload);
+  };
+
+  useEffect(() => {
+    if (isError) {
+      alert("خطا در ایجاد سفارش");
+    } else if (isSuccess) {
+      localStorage.removeItem("cart");
+    }
+  }, [isSuccess, isError, isPending]);
 
   return (
     <div className="flex w-4/5 flex-col gap-5">
@@ -66,7 +90,7 @@ const ShopSummary = ({
         <div className="w-75 space-y-1">
           <p className="flex justify-between">
             <span className="text-placeholder">قیمت محصولات :</span>
-            <span>{Intl.NumberFormat("fa-IR").format(totalPrice)} تومان</span>
+            <span>{persianNumberFormatter(totalPrice)} تومان</span>
           </p>
           <p className="flex justify-between">
             <span className="text-placeholder">هزینه ارسال :</span>
@@ -74,17 +98,24 @@ const ShopSummary = ({
           </p>
           <p className="flex justify-between">
             <span className="text-placeholder">مالیات :</span>
-            <span>۱۰,۰۰۰ تومان</span>
+            <span>{persianNumberFormatter(totalPrice * 0.1)} تومان</span>
           </p>
           <p className="flex justify-between">
             <span className="text-placeholder">مبلغ نهایی :</span>
             <span>
-              {Intl.NumberFormat("fa-IR").format(totalPrice + 20000)} تومان
+              {Intl.NumberFormat("fa-IR").format(totalPrice * 1.1 + 10000)}{" "}
+              تومان
             </span>
           </p>
         </div>
       </div>
-      <Button>ثبت سفارش</Button>
+      <Button disabled={isPending} onClick={handleAddOrder}>
+        {isPending ? (
+          <span className="loading loading-dots loading-sm"></span>
+        ) : (
+          "ثبت سفارش"
+        )}
+      </Button>
     </div>
   );
 };
