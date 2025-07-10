@@ -1,6 +1,13 @@
 import { create } from "zustand";
 import type { CartItem, CartStateI } from "../types/cartTypes";
 
+interface CartStateI {
+  cart: CartItem[];
+  addToCart: (productId: string, name: string, quantity?: number) => void;
+  changeQuantity: (productId: string, quantity: number) => void;
+  removeFromCart: (productId: string) => void;
+}
+
 function getCartFromStorage(): CartItem[] {
   try {
     const data = JSON.parse(localStorage.getItem("cart") || "[]");

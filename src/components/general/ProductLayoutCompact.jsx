@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import FavoriteButton from "./FavoriteButton";
 
 const ProductLayoutCompact = (props) => {
@@ -23,13 +24,15 @@ const ProductLayoutCompact = (props) => {
         id="productImage"
         className="bg-productLayout h-7.5/10 flex flex-1 items-center justify-center overflow-hidden rounded-lg"
       >
-        {(props.product.image && (
-          <img
-            src={props.product.image}
-            alt={props.product.name}
-            className="h-full w-full rounded-lg object-cover"
-          />
-        )) || <div className="h-full w-full" />}
+        <Link to={`/product/${props.product._id}`}>
+          {(props.product.image && (
+            <img
+              src={props.product.image}
+              alt={props.product.name}
+              className="h-full w-full rounded-lg object-cover"
+            />
+          )) || <div className="h-full w-full" />}
+        </Link>
       </div>
       <div className="mt-2 flex items-center justify-between">
         <span

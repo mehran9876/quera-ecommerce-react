@@ -16,9 +16,12 @@ import UserProductPage from "../pages/UserProductPage";
 import AddReviewComponent from "../components/product_page/AddReviewComponent";
 import UserProductReviews from "../components/product_page/UserProductReviews";
 import AdminOrders from "../pages/AdminOrders";
+import UserProfilePage from "../pages/UserProfilePage";
 import App from "../App";
 import Admin from "../layouts/Admin";
 import User from "../layouts/User";
+import UserProductRelated from "../components/product_page/UserProductRelated";
+import FavoritesPage from "../pages/FavoritesPage";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +39,7 @@ const router = createBrowserRouter([
         Component: User,
         children: [
           { path: "cart", Component: UserCartPage },
-          { path: "favorites", element: <h1>Favorites page</h1> },
+          { path: "favorites", Component: FavoritesPage },
           {
             path: "progress",
             Component: UserShoppingProgressPage,
@@ -55,6 +58,7 @@ const router = createBrowserRouter([
               ),
             errorElement: <p>error</p>,
           },
+          { path: "profile", Component: UserProfilePage },
         ],
       },
       {
@@ -93,7 +97,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, Component: AddReviewComponent },
           { path: "comments", Component: UserProductReviews },
-          { path: "related", element: <h1>related</h1> },
+          { path: "related", Component: UserProductRelated },
         ],
       },
       {
