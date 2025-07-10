@@ -37,13 +37,15 @@ export const AdminDropdown = ({ isOpen, onLogout }: AdminDropdownProps) => {
           {link.text}
         </SidebarItem>
       ))}
-      <button
-        className={`btn min-h-10 w-full min-w-max cursor-pointer gap-2 rounded-sm border-transparent bg-transparent p-2 text-base shadow-none`}
-        disabled={isPending}
-        onClick={handleLogout}
-      >
-        خروج
-      </button>
+      <li>
+        <button
+          className={`min-h-10 w-full min-w-max cursor-pointer gap-2 rounded-sm p-2 text-base`}
+          disabled={isPending}
+          onClick={handleLogout}
+        >
+          خروج
+        </button>
+      </li>
     </ul>
   );
 };

@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import FavoriteButton from "./FavoriteButton";
+import Badge from "./Badge";
+import persianNumberFormatter from "../../utils/persianNumberFormatter";
 
 const ProductLayoutCompact = (props) => {
   const cardSizeClass =
@@ -41,7 +43,10 @@ const ProductLayoutCompact = (props) => {
         >
           {props.product.name}
         </span>
-        <span id="badge"></span>
+        <Badge
+          text={`${persianNumberFormatter(props.product.price)} تومان`}
+          className="!text-sm"
+        />
       </div>
     </div>
   );

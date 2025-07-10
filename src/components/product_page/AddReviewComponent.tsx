@@ -31,7 +31,7 @@ const AddReviewComponent = () => {
     );
   };
 
-  if (userId)
+  if (!userId)
     return (
       <div className="flex h-full flex-col items-center justify-center gap-5">
         <p>ابتدا باید وارد حساب خود شوید</p>

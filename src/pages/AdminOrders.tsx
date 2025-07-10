@@ -1,11 +1,13 @@
 // import { orders } from "../assets/testData";
 
+import { orders } from "../assets/testData";
 import OrdersTableData from "../components/orders/OrdersTableData";
-import { useGetAllOrdersAdmin } from "../hooks/useGetAllOrdersAdmin";
+// import { useGetAllOrdersAdmin } from "../hooks/useGetAllOrdersAdmin";
 
 export default function AdminOrders() {
-  const { data: orders, isLoading, isError } = useGetAllOrdersAdmin();
-  console.log(orders);
+  // const { data: orders, isLoading, isError } = useGetAllOrdersAdmin();
+  const isError = false;
+  const isLoading = false;
 
   return (
     <div className="mx-22 my-30 **:text-center">
