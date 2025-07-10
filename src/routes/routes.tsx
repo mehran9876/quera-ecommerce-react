@@ -16,6 +16,8 @@ import AddReviewComponent from "../components/product_page/AddReviewComponent";
 import UserProductReviews from "../components/product_page/UserProductReviews";
 import AdminOrders from "../pages/AdminOrders";
 import App from "../App";
+import Admin from "../layouts/Admin";
+import User from "../layouts/User";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "user",
+        Component: User,
         children: [
           { path: "cart", Component: UserCartPage },
           { path: "favorites", element: <h1>Favorites page</h1> },
@@ -55,6 +58,7 @@ const router = createBrowserRouter([
       },
       {
         path: "admin",
+        Component: Admin,
         children: [
           { path: "dashboard", element: <h1>Dashboard</h1> },
           {

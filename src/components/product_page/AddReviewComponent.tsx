@@ -2,11 +2,10 @@ import React from "react";
 import Button from "../general/button";
 import { useCreateReview } from "../../hooks/useCreateReview";
 import { Link, useParams } from "react-router";
+import { useAuthStore } from "../../stores/use-auth-store";
 
 const AddReviewComponent = () => {
-  // !NOTE: dummy data replace with real user _id later
-  const _id = "adcunada";
-
+  const { userId } = useAuthStore();
   const [userRate, setUserRate] = React.useState(1);
   const [userReview, setUserReview] = React.useState("");
   const { productId } = useParams();
@@ -32,7 +31,7 @@ const AddReviewComponent = () => {
     );
   };
 
-  if (!_id)
+  if (userId)
     return (
       <div className="flex h-full flex-col items-center justify-center gap-5">
         <p>ابتدا باید وارد حساب خود شوید</p>

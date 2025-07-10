@@ -5,10 +5,10 @@ import StepLine from "../components/shoppingProgress/StepLine";
 import ShopSummary from "../components/shoppingProgress/ShopSummary";
 import ShopAddress from "../components/shoppingProgress/ShopAddress";
 import { Link } from "react-router";
+import { useAuthStore } from "../stores/use-auth-store";
 
 const UserShoppingProgressPage = () => {
-  // !NOTE: remove this line when _id global state is implemented
-  const _id = "null";
+  const { userId: _id } = useAuthStore();
 
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
