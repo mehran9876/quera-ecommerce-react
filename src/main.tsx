@@ -12,7 +12,7 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    // 2. Provide the client to your app
+    {/* // 2. Provide the client to your app */}
     <QueryClientProvider client={queryClient}>
       {/* using router */}
       <RouterProvider router={router} />
