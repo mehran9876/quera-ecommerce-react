@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductType } from '../../types/productTypes';
+import { ProductType } from "../../types/productType";
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa6';
 
@@ -22,7 +22,7 @@ const AdminProductCard: React.FC<Props> = ({ product }) => {
             {product.price.toLocaleString('fa-IR')} تومان
           </span>
           <Link
-            to={`/admin/products/${product.id}`}
+            to={`/admin/products/${product._id}`}
             className="flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white px-4 py-1.5 text-sm rounded-md"
           >
             مشاهده بیشتر

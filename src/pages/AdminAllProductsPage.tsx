@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { ProductType } from '../types/productTypes'; 
+import { ProductType } from "../types/productType";
 import axios from '../utils/axios'; 
 import AdminProductCard from '../components/admin/AdminProductCard';
-import SidebarLayout from '../layouts/SidebarLayout';
+import SidebarLayout from '../layouts/Sidebar/SidebarLayout';
 
 const AdminAllProductsPage = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProduct22s = async () => {
       try {
         const res = await axios.get('/products');
-        setProducts(res.data);
+        setProducts(res.data.products);
       } catch (err) {
         console.error('خطا در دریافت محصولات:', err);
       } finally {
@@ -22,7 +22,7 @@ const AdminAllProductsPage = () => {
 
     fetchProducts();
   }, []);
-
+  
   return (
     <SidebarLayout title="محصولات">
       <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -30,7 +30,7 @@ const AdminAllProductsPage = () => {
           <p>در حال بارگذاری...</p>
         ) : products.length > 0 ? (
           products.map((product) => (
-            <AdminProductCard key={product.id} product={product} />
+            <AdminProductCard key={product._id} product={product} />
           ))
         ) : (
           <p>محصولی یافت نشد</p>
